@@ -11,9 +11,11 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\object_bullet</object>
+    <object>objects\control</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\map</room>
