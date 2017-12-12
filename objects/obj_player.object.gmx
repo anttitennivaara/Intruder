@@ -41,6 +41,13 @@ if keyboard_check(ord('W')){
 if keyboard_check(ord('S')){
     y += 5;
 }
+
+if mouse_check_button(mb_left)
+    {
+    bullet = instance_create(x,y,object_bullet);
+    bullet.direction = image_angle;
+    bullet.speed = 10;
+    }
 </string>
           </argument>
         </arguments>
