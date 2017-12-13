@@ -78,15 +78,23 @@ image_angle = point_direction(x, y, mouse_x, mouse_y);
 // Movement:
 if keyboard_check(ord('A')) and not collision_rectangle(x-28, y-16, x, y+16, obj_wall, false, true) {
     x -= 5;
+    sprite_index = spr_player_walking;
 }
-if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
+else if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
     x += 5;
+    sprite_index = spr_player_walking;
 }
-if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
+else if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
     y -= 5;
+    sprite_index = spr_player_walking;
 }
-if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
+else if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
     y += 5;
+    sprite_index = spr_player_walking;
+}
+
+else {
+    sprite_index = spr_player;
 }
 
 // Shooting:
