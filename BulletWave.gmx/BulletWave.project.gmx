@@ -11,8 +11,8 @@
     <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_enemy</sprite>
+    <sprite>sprites\spr_enemybleed</sprite>
     <sprite>sprites\spr_enemydead</sprite>
-    <sprite>sprites\spr_bleed</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>

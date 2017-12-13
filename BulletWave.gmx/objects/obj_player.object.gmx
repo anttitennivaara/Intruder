@@ -80,32 +80,42 @@ if keyboard_check(ord('A')) and not collision_rectangle(x-28, y-16, x, y+16, obj
     x -= 5;
     sprite_index = spr_player_walking;
 }
-else if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
+else {
+    sprite_index = spr_player;
+}
+
+if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
     x += 5;
     sprite_index = spr_player_walking;
 }
-else if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
+else {
+    sprite_index = spr_player;
+}
+
+if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
     y -= 5;
     sprite_index = spr_player_walking;
 }
-else if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
+else {
+    sprite_index = spr_player;
+}
+
+if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
     y += 5;
     sprite_index = spr_player_walking;
 }
-
 else {
     sprite_index = spr_player;
 }
 
 // Shooting:
-if mouse_check_button(mb_left) and canFire = true
-    {
+if mouse_check_button(mb_left) and canFire{
     bullet = instance_create(x,y,obj_bullet);
     bullet.direction = image_angle;
     bullet.speed = 10;
-    alarm[0] = cooldown
-    canFire = false
-    }
+    alarm[0] = cooldown;
+    canFire = false;
+}
 
 </string>
           </argument>
