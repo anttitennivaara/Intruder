@@ -102,9 +102,10 @@ else {
 if mouse_check_button(mb_left) and canFire{
     bullet = instance_create(x,y,obj_bullet);
     bullet.direction = image_angle;
-    bullet.speed = 10;
+    bullet.speed = 20;
     alarm[0] = cooldown;
     canFire = false;
+    audio_play_sound(sound_PistolSilenced, 10, false)
 }
 
 </string>
@@ -116,12 +117,12 @@ if mouse_check_button(mb_left) and canFire{
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
-  <PhysicsObjectDensity>0,5</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0,100000001490116</PhysicsObjectRestitution>
+  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
+  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0,100000001490116</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>0,100000001490116</PhysicsObjectAngularDamping>
-  <PhysicsObjectFriction>0,200000002980232</PhysicsObjectFriction>
+  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints/>
