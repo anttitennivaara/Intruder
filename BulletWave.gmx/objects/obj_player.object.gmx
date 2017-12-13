@@ -76,33 +76,23 @@ canFire = true
 image_angle = point_direction(x, y, mouse_x, mouse_y);
 
 // Movement:
-if keyboard_check(ord('A')) and not collision_rectangle(x-28, y-16, x, y+16, obj_wall, false, true) {
-    x -= 5;
-    sprite_index = spr_player_walking;
-}
-else {
-    sprite_index = spr_player;
-}
-
-if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
-    x += 5;
-    sprite_index = spr_player_walking;
-}
-else {
-    sprite_index = spr_player;
-}
-
-if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
-    y -= 5;
-    sprite_index = spr_player_walking;
-}
-else {
-    sprite_index = spr_player;
-}
-
-if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
-    y += 5;
-    sprite_index = spr_player_walking;
+if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
+    if keyboard_check(ord('A')) and not collision_rectangle(x-28, y-16, x, y+16, obj_wall, false, true) {
+        x -= 5;
+        sprite_index = spr_player_walking;
+    }
+    if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
+        x += 5;
+        sprite_index = spr_player_walking;
+    }
+    if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
+        y -= 5;
+        sprite_index = spr_player_walking;
+    }
+    if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
+        y += 5;
+        sprite_index = spr_player_walking;
+    }
 }
 else {
     sprite_index = spr_player;
@@ -126,12 +116,12 @@ if mouse_check_button(mb_left) and canFire{
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
+  <PhysicsObjectDensity>0,5</PhysicsObjectDensity>
+  <PhysicsObjectRestitution>0,100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
-  <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
+  <PhysicsObjectLinearDamping>0,100000001490116</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>0,100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectFriction>0,200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints/>
