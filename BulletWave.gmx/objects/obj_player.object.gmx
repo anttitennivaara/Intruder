@@ -107,7 +107,6 @@ if mouse_check_button(mb_left) and canFire{
     canFire = false;
     audio_play_sound(sound_PistolSilenced, 10, false)
 }
-
 </string>
           </argument>
         </arguments>
