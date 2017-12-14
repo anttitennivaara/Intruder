@@ -95,8 +95,7 @@ if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W
     }
 }
 else {
-    sprite_index = spr_player;
-    alarm[0] = 0
+    sprite_index = spr_player
 }
 
 // Shooting:
