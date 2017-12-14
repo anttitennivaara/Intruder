@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cooldown = 50
+            <string>cooldown = 20
 canFire = true
 </string>
           </argument>

@@ -17,6 +17,7 @@
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_enemybleed</sprite>
     <sprite>sprites\spr_enemydead</sprite>
+    <sprite>sprites\spr_floor</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -26,6 +27,7 @@
     <object>objects\obj_wall</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_enemydead</object>
+    <object>objects\obj_floor</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\map</room>

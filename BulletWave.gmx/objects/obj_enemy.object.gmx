@@ -25,11 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
+            <string>// Rotation:
+image_angle = point_direction(x, y, obj_player.x, obj_player.y);
+
+// Collision:
+if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
     instance_create(x,y,obj_enemydead);
     audio_play_sound(sound_enemydeath, 9, false);
     audio_play_sound(sound_bullethit, 10, false);
     instance_destroy();
+    instance_destroy(obj_bullet)
 }
 </string>
           </argument>
