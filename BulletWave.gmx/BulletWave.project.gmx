@@ -18,10 +18,10 @@
     <sprite>sprites\spr_enemybleed</sprite>
     <sprite>sprites\spr_enemydead</sprite>
     <sprite>sprites\spr_floor</sprite>
+    <sprite>sprites\spr_table</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
-  <scripts name="scripts"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_bullet</object>
@@ -29,6 +29,7 @@
     <object>objects\obj_enemy</object>
     <object>objects\obj_enemydead</object>
     <object>objects\obj_floor</object>
+    <object>objects\obj_table</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\map</room>
