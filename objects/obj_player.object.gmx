@@ -27,6 +27,35 @@
             <kind>1</kind>
             <string>cooldown = 20
 canFire = true
+maxAmmo = 12
+ammo = maxAmmo
+ammoStatus = 'Ammo: '+string_format(0,0,ammo)
+reloading = false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>reloading = false
+ammo = maxAmmo
+canFire = true
 </string>
           </argument>
         </arguments>
@@ -99,14 +128,51 @@ else {
 }
 
 // Shooting:
-if mouse_check_button(mb_left) and canFire{
+if mouse_check_button(mb_left) and canFire and ammo &gt; 0{
     bullet = instance_create(x,y,obj_bullet);
     bullet.direction = image_angle;
     bullet.speed = 20;
+    ammo -= 1
     alarm[0] = cooldown;
     canFire = false;
     audio_play_sound(sound_PistolSilenced, 10, false)
 }
+
+// Reloading:
+if keyboard_check(ord('R')) and ammo != maxAmmo {
+    reloading = true
+    canFire = false
+    alarm[1] = 200
+}
+if reloading {
+    ammoStatus = 'Reloading...'
+}
+if not reloading {
+    ammoStatus = 'Ammo: '+string_format(ammo,0,0)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(280,380,ammoStatus)
 </string>
           </argument>
         </arguments>
