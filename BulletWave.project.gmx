@@ -22,6 +22,7 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_bullet</object>
