@@ -142,7 +142,7 @@ if mouse_check_button(mb_left) and canFire and ammo &gt; 0{
 if keyboard_check(ord('R')) and ammo != maxAmmo {
     reloading = true
     canFire = false
-    alarm[1] = 200
+    alarm[1] = 180
 }
 if reloading {
     ammoStatus = 'Reloading...'

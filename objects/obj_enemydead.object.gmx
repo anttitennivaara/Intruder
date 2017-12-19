@@ -26,11 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>animationDone = false;
-image_angle = bullet.direction
+image_angle = point_direction(x,y,obj_player.x,obj_player.y)
 alarm[0] = 90;
 
-image_xscale = 1.5;
-image_yscale = 1.5;
+image_xscale = 1.5
+image_yscale = 1.5
 </string>
           </argument>
         </arguments>
