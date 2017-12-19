@@ -25,8 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// sight radius
-Radius = 100;
+            <string>sightRadius = 100
+inRadius = distance_to_point(obj_player.x,obj_player.y) &lt; sightRadius
+canSee = collision_line(x, y, obj_player.x, obj_player.y, obj_wall, false, true)
 </string>
           </argument>
         </arguments>
@@ -49,24 +50,30 @@ Radius = 100;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Rotation:
-image_angle = point_direction(x, y, obj_player.x, obj_player.y);
-
-// Collision:
+            <string>// Collision:
 if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
-    instance_create(x,y,obj_enemydead);
-    audio_play_sound(sound_enemydeath, 9, false);
-    audio_play_sound(sound_bullethit, 10, false);
-    instance_destroy();
+    instance_create(x,y,obj_enemydead)
+    audio_play_sound(sound_enemydeath, 9, false)
+    audio_play_sound(sound_bullethit, 10, false)
+    instance_destroy()
     instance_destroy(obj_bullet)
 }
-// Line of Sight
-var CanSee = collision_line(x, y, obj_player.x, obj_player.y, obj_wall, false, true);  
-var IsInsideRadius = distance_to_point(obj_player.x,obj_player.y) &lt; Radius;  
 
-if(CanSee and IsInsideRadius){  
-    x = obj_player
-    y = obj_player
+// Line of Sight
+if distance_to_point(obj_player.x,obj_player.y) &lt; sightRadius {
+    inRadius = true
+}
+else {
+    inRadius = false
+}
+if collision_line(x, y, obj_player.x, obj_player.y, obj_wall, false, true) {
+    cantSee = true
+}
+else {
+    cantSee = false
+}
+if inRadius and not cantSee {
+    image_angle = point_direction(x, y, obj_player.x, obj_player.y)
 }  
 </string>
           </argument>
