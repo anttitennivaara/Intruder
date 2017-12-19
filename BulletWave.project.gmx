@@ -30,7 +30,6 @@
     <script>scripts\draw_shadow.gml</script>
     <script>scripts\draw_shadow_ext.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_bullet</object>
