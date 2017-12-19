@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>animationDone = false;
+image_angle = bullet.direction
 alarm[0] = 90;
 
 image_xscale = 1.5;
