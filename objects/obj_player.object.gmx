@@ -30,7 +30,6 @@ cooldown = 20
 canFire = true
 maxAmmo = 12
 ammo = maxAmmo
-ammoStatus = 'Ammo: '+string_format(0,0,ammo)
 reloading = false
 </string>
           </argument>
@@ -145,12 +144,6 @@ if keyboard_check(ord('R')) and ammo != maxAmmo {
     canFire = false
     alarm[1] = 180
 }
-if reloading {
-    ammoStatus = 'Reloading'
-}
-if not reloading {
-    ammoStatus = 'Ammo: '+string_format(ammo,0,0)
-}
 </string>
           </argument>
         </arguments>
@@ -175,8 +168,14 @@ if not reloading {
             <kind>1</kind>
             <string>draw_set_alpha_test(true)
 
-draw_sprite_ext(spr_hudbg,0,0,0,1,1,0,0.5,0.5)
-draw_text(222,296,ammoStatus)
+draw_set_font(font_large)
+draw_text(40,240,string_format(ammo,0,0))
+if reloading {
+    draw_set_font(font_small)
+    draw_text(10,290,'Reloading...')
+}
+
+draw_sprite(spr_ammoind,ammo,20,260)
 </string>
           </argument>
         </arguments>

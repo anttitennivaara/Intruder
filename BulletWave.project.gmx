@@ -21,7 +21,7 @@
     <sprite>sprites\spr_enemydead</sprite>
     <sprite>sprites\spr_floor</sprite>
     <sprite>sprites\spr_table</sprite>
-    <sprite>sprites\spr_hudbg</sprite>
+    <sprite>sprites\spr_ammoind</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -31,6 +31,10 @@
     <script>scripts\draw_shadow.gml</script>
     <script>scripts\draw_shadow_ext.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font_large</font>
+    <font>fonts\font_small</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_bullet</object>
