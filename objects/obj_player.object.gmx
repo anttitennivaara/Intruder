@@ -106,19 +106,19 @@ image_angle = point_direction(x, y, mouse_x, mouse_y);
 
 // Movement:
 if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
-    if keyboard_check(ord('A')) and not collision_rectangle(x-28, y-16, x, y+16, obj_wall, false, true) {
+    if keyboard_check(ord('A')) and not collision_rectangle(x-14, y-8, x, y+8, obj_wall, false, true) {
         x -= 5;
         sprite_index = spr_player_walking
     }
-    if keyboard_check(ord('D')) and not collision_rectangle(x, y-16, x+28, y+16, obj_wall, false, true) {
+    if keyboard_check(ord('D')) and not collision_rectangle(x, y-8, x+14, y+8, obj_wall, false, true) {
         x += 5;
         sprite_index = spr_player_walking
     }
-    if keyboard_check(ord('W')) and not collision_rectangle(x-16, y-28, x+16, y, obj_wall, false, true) {
+    if keyboard_check(ord('W')) and not collision_rectangle(x-8, y-14, x+8, y, obj_wall, false, true) {
         y -= 5;
         sprite_index = spr_player_walking
     }
-    if keyboard_check(ord('S')) and not collision_rectangle(x-16, y, x+16, y+28, obj_wall, false, true) {
+    if keyboard_check(ord('S')) and not collision_rectangle(x-8, y, x+8, y+14, obj_wall, false, true) {
         y += 5;
         sprite_index = spr_player_walking
     }
@@ -172,7 +172,10 @@ if not reloading {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(280,380,ammoStatus)
+            <string>draw_set_alpha_test(true)
+
+draw_sprite_ext(spr_hudbg,0,0,0,1,1,0,0.5,0.5)
+draw_text(222,296,ammoStatus)
 </string>
           </argument>
         </arguments>

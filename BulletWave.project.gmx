@@ -21,6 +21,7 @@
     <sprite>sprites\spr_enemydead</sprite>
     <sprite>sprites\spr_floor</sprite>
     <sprite>sprites\spr_table</sprite>
+    <sprite>sprites\spr_hudbg</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
