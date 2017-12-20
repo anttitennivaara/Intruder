@@ -129,12 +129,12 @@ else {
 
 // Shooting:
 if mouse_check_button(mb_left) and canFire and ammo &gt; 0{
-    bullet = instance_create(x,y,obj_bullet);
-    bullet.direction = image_angle;
-    bullet.speed = 20;
+    bullet = instance_create(x,y,obj_bullet)
+    bullet.direction = image_angle
+    bullet.speed = 20
     ammo -= 1
-    alarm[0] = cooldown;
-    canFire = false;
+    alarm[0] = cooldown
+    canFire = false
     audio_play_sound(sound_PistolSilenced, 10, false)
 }
 
