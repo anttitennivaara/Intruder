@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cooldown = 20
+            <string>walking = 3
+cooldown = 20
 canFire = true
 maxAmmo = 12
 ammo = maxAmmo
@@ -107,19 +108,19 @@ image_angle = point_direction(x, y, mouse_x, mouse_y);
 // Movement:
 if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
     if keyboard_check(ord('A')) and not collision_rectangle(x-14, y-8, x, y+8, obj_wall, false, true) {
-        x -= 5;
+        x -= walking;
         sprite_index = spr_player_walking
     }
     if keyboard_check(ord('D')) and not collision_rectangle(x, y-8, x+14, y+8, obj_wall, false, true) {
-        x += 5;
+        x += walking;
         sprite_index = spr_player_walking
     }
     if keyboard_check(ord('W')) and not collision_rectangle(x-8, y-14, x+8, y, obj_wall, false, true) {
-        y -= 5;
+        y -= walking;
         sprite_index = spr_player_walking
     }
     if keyboard_check(ord('S')) and not collision_rectangle(x-8, y, x+8, y+14, obj_wall, false, true) {
-        y += 5;
+        y += walking;
         sprite_index = spr_player_walking
     }
 }
@@ -145,7 +146,7 @@ if keyboard_check(ord('R')) and ammo != maxAmmo {
     alarm[1] = 180
 }
 if reloading {
-    ammoStatus = 'Reloading...'
+    ammoStatus = 'Reloading'
 }
 if not reloading {
     ammoStatus = 'Ammo: '+string_format(ammo,0,0)
