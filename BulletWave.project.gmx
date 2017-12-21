@@ -22,6 +22,8 @@
     <sprite>sprites\spr_floor</sprite>
     <sprite>sprites\spr_table</sprite>
     <sprite>sprites\spr_ammoind</sprite>
+    <sprite>sprites\sprite_went</sprite>
+    <sprite>sprites\spr_ventoppen</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -44,8 +46,11 @@
     <object>objects\obj_enemydead</object>
     <object>objects\obj_floor</object>
     <object>objects\obj_table</object>
+    <object>objects\obj_vent</object>
+    <object>objects\obj_ventopen</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\map_vent</room>
     <room>rooms\map</room>
   </rooms>
   <help>

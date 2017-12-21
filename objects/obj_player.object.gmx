@@ -144,6 +144,30 @@ if keyboard_check(ord('R')) and ammo != maxAmmo {
     canFire = false
     alarm[1] = 180
 }
+
+//Vent walking
+
+if collision_rectangle(x,y,x,y,obj_vent,false,true)
+    {
+        walking = 1
+    }
+
+//Leaving and Geting into vent
+if collision_rectangle(x,y,x,y,obj_ventopen,false,true)
+    {
+    draw_text(160,200,'Get out?')
+    if keyboard_check(ord('Q')){
+            room_goto(map)
+        }
+    }
+    
+if collision_rectangle(x,y,x,y,obj_table,false,true)
+    {
+    draw_text(160,200,'Get into vent?')
+    if keyboard_check(ord('Q')){
+            room_goto(map_vent)
+        }
+    }
 </string>
           </argument>
         </arguments>
