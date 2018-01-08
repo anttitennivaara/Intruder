@@ -53,7 +53,7 @@ plr_y = obj_player.y + 8
 
 draw_sprite_ext_shadow(sprite_index,0,x,y,1,1,image_angle,c_white,1,4,225,c_black,0.5)
 draw_self()
-
+/*
 // Top:
 draw_primitive_begin(pr_trianglestrip)
 draw_vertex_colour(x, y, c_black, 1)
