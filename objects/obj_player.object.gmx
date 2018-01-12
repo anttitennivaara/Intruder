@@ -102,24 +102,24 @@ canFire = true
           <argument>
             <kind>1</kind>
             <string>// Rotation:
-image_angle = point_direction(x, y, mouse_x, mouse_y);
+image_angle = point_direction(x, y, mouse_x, mouse_y)
 
 // Movement:
 if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
     if keyboard_check(ord('A')) and not collision_rectangle(x-14, y-8, x, y+8, obj_wall, false, true) {
-        x -= walking;
+        x -= walking
         sprite_index = spr_player_walking
     }
     if keyboard_check(ord('D')) and not collision_rectangle(x, y-8, x+14, y+8, obj_wall, false, true) {
-        x += walking;
+        x += walking
         sprite_index = spr_player_walking
     }
     if keyboard_check(ord('W')) and not collision_rectangle(x-8, y-14, x+8, y, obj_wall, false, true) {
-        y -= walking;
+        y -= walking
         sprite_index = spr_player_walking
     }
     if keyboard_check(ord('S')) and not collision_rectangle(x-8, y, x+8, y+14, obj_wall, false, true) {
-        y += walking;
+        y += walking
         sprite_index = spr_player_walking
     }
 }
@@ -145,29 +145,23 @@ if keyboard_check(ord('R')) and ammo != maxAmmo {
     alarm[1] = 180
 }
 
-//Vent walking
-
-if collision_rectangle(x,y,x,y,obj_vent,false,true)
-    {
+// Walking in vents:
+if collision_rectangle(x,y,x,y,obj_vent,false,true) {
         walking = 1
-    }
+}
 
-//Leaving and Geting into vent
-if collision_rectangle(x,y,x,y,obj_ventopen,false,true)
-    {
-    draw_text(160,200,'Get out?')
-    if keyboard_check(ord('Q')){
+// Entering and leaving vents:
+if collision_rectangle(x,y,x,y,obj_ventopen,false,true) {
+    if keyboard_check(ord('Q')) {
             room_goto(map)
-        }
     }
+}
     
-if collision_rectangle(x,y,x,y,obj_table,false,true)
-    {
-    draw_text(160,200,'Get into vent?')
-    if keyboard_check(ord('Q')){
+if collision_rectangle(x,y-4,x,y+4,obj_table,false,true) {
+    if keyboard_check(ord('Q')) {
             room_goto(map_vent)
-        }
     }
+}
 </string>
           </argument>
         </arguments>
@@ -197,6 +191,16 @@ draw_text(40,240,string_format(ammo,0,0))
 if reloading {
     draw_set_font(font_small)
     draw_text(10,290,'Reloading...')
+}
+
+if collision_rectangle(x,y,x,y,obj_ventopen,false,true) {
+    draw_set_font(font_small)
+    draw_text(80,200,'[Q] Leave vent')
+}
+
+if collision_rectangle(x,y-4,x,y+4,obj_table,false,true) {
+    draw_set_font(font_small)
+    draw_text(120,200,'[Q] Enter vent')
 }
 
 draw_sprite(spr_ammoind,ammo,20,260)

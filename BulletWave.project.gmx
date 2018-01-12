@@ -50,8 +50,8 @@
     <object>objects\obj_ventopen</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\map_vent</room>
     <room>rooms\map</room>
+    <room>rooms\map_vent</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
