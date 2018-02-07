@@ -42,7 +42,6 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_menu_settings.gml</script>
     <script>scripts\draw_sprite_ext_shadow.gml</script>
     <script>scripts\draw_sprite_shadow.gml</script>
     <script>scripts\draw_shadow.gml</script>
@@ -70,16 +69,8 @@
       <object>objects\obj_ventopen</object>
       <object>objects\obj_ventclosed</object>
     </objects>
-    <objects name="menu">
-      <object>objects\obj_menu</object>
-      <object>objects\obj_menu_play</object>
-      <object>objects\obj_menu_settings</object>
-      <object>objects\obj_menu_quit</object>
-      <object>objects\obj_menu_selection</object>
-    </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\menu</room>
     <room>rooms\map</room>
     <room>rooms\map_vent</room>
   </rooms>
