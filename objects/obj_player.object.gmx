@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>walking = 3
+            <string>realX = x
+realY = y
+walking = 3
 cooldown = 20
 canFire = true
 maxAmmo = 12
@@ -34,6 +36,8 @@ reloading = false
 justEntered = false
 windowX = window_get_width()
 windowY = window_get_height()
+dead = false
+selection = 0
 
 // Dialogs:
 welcomeText = 'Welcome to [Game name] tech demo! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
@@ -155,32 +159,35 @@ canFire = true
           <argument>
             <kind>1</kind>
             <string>// Rotation:
-image_angle = point_direction(x, y, mouse_x, mouse_y)
-
-// Movement:
-if room = map {
-    walking = 3
+if not dead {
+    image_angle = point_direction(x, y, mouse_x, mouse_y)
 }
-if room = map_vent {
+    
+// Movement:
+if room = map and not dead {
     walking = 1
+}
+if room = map_vent and not dead {
+    walking = 0.4
 }
 
 if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
-    if keyboard_check(ord('A')) and not collision_rectangle(x-14,y-8,x,y+8,obj_wall,false,true) {
-        x -= walking
-        sprite_index = spr_player_walking
+    sprite_index = spr_player_walking
+    if keyboard_check(ord('A')) and not collision_rectangle(x-7,y-4,x,y+4,obj_wall,false,true) {
+        realX -= walking
+        x = round(realX)
     }
-    if keyboard_check(ord('D')) and not collision_rectangle(x,y-8,x+14,y+8,obj_wall,false,true) {
-        x += walking
-        sprite_index = spr_player_walking
+    if keyboard_check(ord('D')) and not collision_rectangle(x,y-4,x+7,y+4,obj_wall,false,true) {
+        realX += walking
+        x = round(realX)
     }
-    if keyboard_check(ord('W')) and not collision_rectangle(x-8,y-14,x+8,y,obj_wall,false,true) {
-        y -= walking
-        sprite_index = spr_player_walking
+    if keyboard_check(ord('W')) and not collision_rectangle(x-4,y-7,x+4,y,obj_wall,false,true) {
+        realY -= walking
+        y = round(realY)
     }
-    if keyboard_check(ord('S')) and not collision_rectangle(x-8,y,x+8,y+14,obj_wall,false,true) {
-        y += walking
-        sprite_index = spr_player_walking
+    if keyboard_check(ord('S')) and not collision_rectangle(x-4,y,x+4,y+7,obj_wall,false,true) {
+        realY += walking
+        y = round(realY)
     }
 }
 else {
@@ -188,7 +195,7 @@ else {
 }
 
 // Shooting:
-if mouse_check_button(mb_left) and canFire and ammo &gt; 0 {
+if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading and not dead {
     bullet = instance_create(x,y,obj_bullet)
     bullet.direction = image_angle
     bullet.speed = 20
@@ -199,19 +206,14 @@ if mouse_check_button(mb_left) and canFire and ammo &gt; 0 {
 }
 
 // Reloading:
-if keyboard_check(ord('R')) and ammo != maxAmmo {
+if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading and not dead {
     reloading = true
     canFire = false
     alarm[1] = 180
 }
 
-// Walking in vents:
-if collision_rectangle(x,y,x,y,obj_vent,false,true) {
-        walking = 1
-}
-
 // Entering and leaving vents:
-if collision_rectangle(x,y,x,y,obj_ventopen,false,true) and not justEntered {
+if collision_rectangle(x-4,y-4,x+4,y+4,obj_ventopen,false,true) and not justEntered and not dead {
     if keyboard_check(ord('Q')) {
         justEntered = true
         room_goto(map)
@@ -219,11 +221,42 @@ if collision_rectangle(x,y,x,y,obj_ventopen,false,true) and not justEntered {
     }
 }
     
-if collision_rectangle(x,y-4,x,y+4,obj_table,false,true) and not justEntered {
+if collision_rectangle(x-4,y-4,x+4,y+4,obj_table,false,true) and not justEntered and not dead {
     if keyboard_check(ord('Q')) {
         justEntered = true
         room_goto(map_vent)
         alarm[2] = 10
+    }
+}
+
+// Dying:
+if collision_rectangle(x-4,y-4,x+4,y+4,obj_bulletenemy,false,true) {
+    dead = true
+}
+
+if dead {
+    walking = 0
+    selection = 0
+    canFire = false
+    if keyboard_check(ord('W')) {
+        selection -= 1
+    }
+    if keyboard_check(ord('S')) {
+        selection += 1
+    }
+    if selection &lt;= 0 {
+        selection = 1
+    }
+    if selection &gt;= 1 {
+        selection = 0
+    }
+    if keyboard_check(vk_enter) {
+        if selection == 0 {
+            room_restart()
+        }
+        if selection == 1 {
+            game_end()
+        }
     }
 }
 </string>
@@ -249,14 +282,19 @@ if collision_rectangle(x,y-4,x,y+4,obj_table,false,true) and not justEntered {
           <argument>
             <kind>1</kind>
             <string>draw_set_alpha_test(true)
-
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
 draw_set_color(c_white)
 draw_set_font(font_large)
-draw_text(40,windowY-80,string_format(ammo,0,0))
+
+draw_sprite(spr_vision,0,windowX/2,windowY/2)
+
+draw_text(64,windowY-64,string_format(ammo,0,0))
+
 if reloading {
     draw_set_color(c_white)
     draw_set_font(font_small)
-    draw_text(10,windowY-30,'Reloading...')
+    draw_text(64,windowY-22,'Reloading...')
 }
 
 if collision_rectangle(x,y,x,y,obj_ventopen,false,true) {
@@ -271,7 +309,7 @@ if collision_rectangle(x,y-4,x,y+4,obj_table,false,true) {
     draw_text(window_center(),window_center(),'[Q] Enter vent')
 }
 
-draw_sprite(spr_ammoind,ammo,20,windowY-60)
+draw_sprite(spr_ammoind,ammo,32,windowY-64)
 
 var inDialog = false
 
@@ -284,9 +322,17 @@ if inDialog {
     draw_sprite(spr_dialog,0,windowX/2,windowY/10*7)
     draw_set_font(font_small)
     draw_set_color(c_black)
-    draw_text_ext(windowX/2-220,windowY/10*7-60,dialog,32,440)
+    draw_text_ext(windowX/2,windowY/10*8-48,dialog,32,440)
     walking = 0
     alarm[3] = 300
+}
+
+// Death screen:
+if dead {
+    draw_set_font(font_large)
+    draw_set_color(c_white)
+    draw_text_ext(windowX/2,windowY/2-64,'MISSION FAILED#Try again#Quit',64,windowX)
+    draw_text_ext(windowX/2,windowY/2+(64*selection),'[                               ]',64,windowX)
 }
 </string>
           </argument>
@@ -312,7 +358,7 @@ if inDialog {
             <kind>1</kind>
             <string>draw_set_alpha_test(true)
 
-draw_sprite_ext_shadow(sprite_index,0,x,y,1,1,image_angle,c_white,1,4,225,c_black,0.5)
+draw_sprite_ext_shadow(sprite_index,0,x,y,1,1,image_angle,c_white,1,2,225,c_black,0.5)
 draw_self()
 </string>
           </argument>

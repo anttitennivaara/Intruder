@@ -16,7 +16,6 @@
       <sprite>sprites\spr_player</sprite>
       <sprite>sprites\spr_player_walking</sprite>
       <sprite>sprites\spr_bullet</sprite>
-      <sprite>sprites\spr_ammoind</sprite>
     </sprites>
     <sprites name="enemy">
       <sprite>sprites\spr_enemy</sprite>
@@ -30,16 +29,15 @@
       <sprite>sprites\spr_vent</sprite>
       <sprite>sprites\spr_ventoppen</sprite>
       <sprite>sprites\spr_ventclosed</sprite>
+      <sprite>sprites\spr_pipev</sprite>
+      <sprite>sprites\spr_pipeh</sprite>
+      <sprite>sprites\spr_trigger</sprite>
     </sprites>
-    <sprites name="menu">
-      <sprite>sprites\spr_menu_play</sprite>
-      <sprite>sprites\spr_menu_settings</sprite>
-      <sprite>sprites\spr_menu_quit</sprite>
-      <sprite>sprites\spr_menu_selection</sprite>
-      <sprite>sprites\spr_menu_bg</sprite>
+    <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
+      <sprite>sprites\spr_vision</sprite>
+      <sprite>sprites\spr_ammoind</sprite>
     </sprites>
-    <sprite>sprites\spr_trigger</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -70,6 +68,8 @@
       <object>objects\obj_vent</object>
       <object>objects\obj_ventopen</object>
       <object>objects\obj_ventclosed</object>
+      <object>objects\obj_pipev</object>
+      <object>objects\obj_pipeh</object>
     </objects>
     <objects name="dialog">
       <object>objects\obj_dialog_welcome</object>
