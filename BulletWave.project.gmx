@@ -75,7 +75,8 @@
       <object>objects\obj_pipev</object>
       <object>objects\obj_pipeh</object>
     </objects>
-    <objects name="dialog">
+    <objects name="hud">
+      <object>objects\obj_menubuttons</object>
       <object>objects\obj_dialog_welcome</object>
     </objects>
     <objects name="sounds">
@@ -83,6 +84,7 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\menu</room>
     <room>rooms\map</room>
     <room>rooms\map_vent</room>
   </rooms>
