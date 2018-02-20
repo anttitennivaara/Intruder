@@ -10,6 +10,9 @@
     <sound>sound\sound_PistolSilenced</sound>
     <sound>sound\sound_enemydeath</sound>
     <sound>sound\sound_bullethit</sound>
+    <sounds name="Music">
+      <sound>sound\AcceptingTheMission</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="player">
@@ -73,6 +76,9 @@
     </objects>
     <objects name="dialog">
       <object>objects\obj_dialog_welcome</object>
+    </objects>
+    <objects name="Sounds">
+      <object>objects\obj_music</object>
     </objects>
   </objects>
   <rooms name="rooms">
