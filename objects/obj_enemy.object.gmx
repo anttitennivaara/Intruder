@@ -83,6 +83,15 @@ if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
     instance_destroy(obj_bullet)
 }
 
+// Movement:
+if instance_exists(obj_player) {
+    var grid = mp_grid_create(0,0,room_width/8,room_height/8,8,8)
+    path = path_add()
+    mp_grid_add_instances(path,obj_wall,1)
+    mp_grid_path(grid,path,x,y,obj_player.x,obj_player.y,1)
+    path_start(path,1,"",1)
+}
+
 // Line of Sight
 if instance_exists(obj_player) {
     if distance_to_point(obj_player.x,obj_player.y) &lt;= sightRadius {
