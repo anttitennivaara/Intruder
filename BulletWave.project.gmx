@@ -35,6 +35,9 @@
       <sprite>sprites\spr_pipev</sprite>
       <sprite>sprites\spr_pipeh</sprite>
       <sprite>sprites\spr_trigger</sprite>
+      <sprite>sprites\sprite18</sprite>
+      <sprite>sprites\spr_desk</sprite>
+      <sprite>sprites\spr_paper</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -68,11 +71,13 @@
       <object>objects\obj_floor</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_table</object>
+      <object>objects\obj_desk</object>
       <object>objects\obj_vent</object>
       <object>objects\obj_ventopen</object>
       <object>objects\obj_ventclosed</object>
       <object>objects\obj_pipev</object>
       <object>objects\obj_pipeh</object>
+      <object>objects\obj_paper</object>
     </objects>
     <objects name="dialog">
       <object>objects\obj_dialog_welcome</object>
