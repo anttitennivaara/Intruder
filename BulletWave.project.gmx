@@ -17,13 +17,14 @@
   <sprites name="sprites">
     <sprites name="player">
       <sprite>sprites\spr_player</sprite>
-      <sprite>sprites\spr_player_walking</sprite>
+      <sprite>sprites\spr_playerwalking</sprite>
       <sprite>sprites\spr_bullet</sprite>
+      <sprite>sprites\spr_playerdead</sprite>
     </sprites>
     <sprites name="enemy">
       <sprite>sprites\spr_enemy</sprite>
-      <sprite>sprites\spr_enemybleed</sprite>
       <sprite>sprites\spr_enemydead</sprite>
+      <sprite>sprites\spr_enemywalking</sprite>
     </sprites>
     <sprites name="enviroment">
       <sprite>sprites\spr_floor</sprite>

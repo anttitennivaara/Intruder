@@ -40,7 +40,7 @@ windowY = window_get_height()
 display_reset(0,true)
 
 // Dialogs:
-welcomeText = 'Welcome to [Game name] tech demo! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
+welcomeText = 'Welcome to "Infiltrator: The Cult of Cthulhu" tech demo! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
 </string>
           </argument>
         </arguments>
@@ -174,7 +174,7 @@ if keyboard_check(vk_escape) {
 }
 
 if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
-    sprite_index = spr_player_walking
+    sprite_index = spr_playerwalking
     if keyboard_check(ord('A')) and not collision_rectangle(x-6,y-4,x,y+4,obj_wall,false,true) {
         realX -= walking
         x = round(realX)
@@ -234,7 +234,7 @@ if collision_rectangle(x-6,y-6,x+6,y+6,obj_table,false,true) and not justEntered
 // Dying:
 if collision_circle(x,y,6,obj_bulletenemy,true,true) {
     dead = instance_create(x,y,obj_playerdead)
-    dead.image_angle = image_angle
+    dead.image_angle = obj_bulletenemy.image_angle
     instance_destroy()
 }
 </string>
@@ -295,15 +295,15 @@ draw_sprite(spr_ammoind,ammo,32,windowY-64)
 var inDialog = false
 
 if collision_point(x,y,obj_dialog_welcome,false,true) and obj_dialog_welcome.done = false {
-    var inDialog = true
-    var dialog = welcomeText
+    inDialog = true
+    dialog = welcomeText
 }
     
 if inDialog {
     draw_sprite(spr_dialog,0,windowX/2,windowY/10*7)
     draw_set_font(font_small)
     draw_set_color(c_black)
-    draw_text_ext(windowX/2,windowY/10*8-48,dialog,32,440)
+    draw_text_ext(windowX/2,windowY/10*7,dialog,32,440)
     walking = 0
     alarm[3] = 300
 }
