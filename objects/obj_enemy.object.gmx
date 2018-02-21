@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sightRadius = 20
-canFire = true
+            <string>sightRadius = 15
+canFire = false
 cooldown = 20
 plrOldX = x
 plrOldY = y
@@ -99,22 +99,24 @@ if path_index = -1 {
 
 // Line of Sight
 if instance_exists(obj_player) {
-    if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
-        plrOldX = obj_player.x
-        plrOldY = obj_player.y
-        if distance_to_point(obj_player.x,obj_player.y) &lt;= sightRadius {
-            if canFire {
-                bullet = instance_create(x,y,obj_bulletenemy)
-                bullet.direction = image_angle
-                bullet.speed = 10
-                alarm[0] = cooldown
-                canFire = false
+    if (image_angle - point_direction(x,y,obj_player.x,obj_player.y) &gt;= -45 and image_angle - point_direction(x,y,obj_player.x,obj_player.y) &lt;= 45) or distance_to_point(obj_player.x,obj_player.y) &lt;= 5 {
+        if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
+            plrOldX = obj_player.x
+            plrOldY = obj_player.y
+            if distance_to_point(obj_player.x,obj_player.y) &lt;= sightRadius {
+                if canFire {
+                    bullet = instance_create(x,y,obj_bulletenemy)
+                    bullet.direction = image_angle
+                    bullet.speed = 10
+                    alarm[0] = cooldown
+                    canFire = false
+                }
             }
         }
-        else {
+    }
+    else {
             canFire = false
-            alarm[0] = 60
-        }
+            alarm[0] = 90
     }
 }
 </string>
@@ -151,7 +153,7 @@ draw_self()
   </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
-  <PhysicsObjectShape>0</PhysicsObjectShape>
+  <PhysicsObjectShape>1</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
