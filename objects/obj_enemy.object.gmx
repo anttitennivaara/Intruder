@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>sightRadius = 20
-canSee = collision_line(x, y, obj_player.x, obj_player.y, obj_wall, false, true)
 canFire = true
 cooldown = 20
 plrOldX = x
@@ -85,17 +84,18 @@ if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
     instance_destroy(obj_bullet)
 }
 
+grid = mp_grid_create(0,0,room_width/8,room_height/8,8,8)
+path = path_add()
+mp_grid_add_instances(path,obj_wall,true)
+mp_grid_path(grid,path,x,y,plrOldX,plrOldY,true)
+path_start(path,0.5,"",false)
+image_angle = point_direction(x,y,plrOldX,plrOldY)
+
 // Line of Sight
 if instance_exists(obj_player) {
-    if !collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
+    if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
         plrOldX = obj_player.x
         plrOldY = obj_player.y
-        var grid = mp_grid_create(0,0,room_width/8,room_height/8,8,8)
-        path = path_add()
-        mp_grid_add_instances(path,obj_wall,1)
-        mp_grid_path(grid,path,x,y,plrOldX,plrOldY,1)
-        path_start(path,0.5,"",1)
-        image_angle = point_direction(x,y,plrOldX,plrOldY)
         if distance_to_point(obj_player.x,obj_player.y) &lt;= sightRadius {
             if canFire {
                 bullet = instance_create(x,y,obj_bulletenemy)
