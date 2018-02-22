@@ -36,6 +36,7 @@
       <sprite>sprites\spr_pipev</sprite>
       <sprite>sprites\spr_pipeh</sprite>
       <sprite>sprites\spr_trigger</sprite>
+      <sprite>sprites\spr_elevator</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -78,6 +79,8 @@
       <object>objects\obj_ventclosed</object>
       <object>objects\obj_pipev</object>
       <object>objects\obj_pipeh</object>
+      <object>objects\obj_elevator</object>
+      <object>objects\obj_obstacle</object>
     </objects>
     <objects name="hud">
       <object>objects\obj_menubuttons</object>

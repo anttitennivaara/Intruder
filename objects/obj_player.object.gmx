@@ -175,19 +175,19 @@ if keyboard_check(vk_escape) {
 
 if (keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S'))) and not reloading {
     sprite_index = spr_playerwalking
-    if keyboard_check(ord('A')) and not collision_rectangle(x-6,y-4,x,y+4,obj_wall,false,true) {
+    if keyboard_check(ord('A')) and not collision_rectangle(x-6,y-4,x,y+4,obj_obstacle,false,true) {
         realX -= walking
         x = round(realX)
     }
-    if keyboard_check(ord('D')) and not collision_rectangle(x,y-4,x+6,y+4,obj_wall,false,true) {
+    if keyboard_check(ord('D')) and not collision_rectangle(x,y-4,x+6,y+4,obj_obstacle,false,true) {
         realX += walking
         x = round(realX)
     }
-    if keyboard_check(ord('W')) and not collision_rectangle(x-4,y-6,x+4,y,obj_wall,false,true) {
+    if keyboard_check(ord('W')) and not collision_rectangle(x-4,y-6,x+4,y,obj_obstacle,false,true) {
         realY -= walking
         y = round(realY)
     }
-    if keyboard_check(ord('S')) and not collision_rectangle(x-4,y,x+4,y+6,obj_wall,false,true) {
+    if keyboard_check(ord('S')) and not collision_rectangle(x-4,y,x+4,y+6,obj_obstacle,false,true) {
         realY += walking
         y = round(realY)
     }
