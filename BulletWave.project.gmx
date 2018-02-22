@@ -37,6 +37,10 @@
       <sprite>sprites\spr_pipeh</sprite>
       <sprite>sprites\spr_trigger</sprite>
       <sprite>sprites\spr_elevator</sprite>
+      <sprites name="desk">
+        <sprite>sprites\spr_desk</sprite>
+        <sprite>sprites\spr_desk4</sprite>
+      </sprites>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -81,6 +85,10 @@
       <object>objects\obj_pipeh</object>
       <object>objects\obj_elevator</object>
       <object>objects\obj_obstacle</object>
+      <objects name="desk">
+        <object>objects\obj_desk</object>
+        <object>objects\obj_desk4</object>
+      </objects>
     </objects>
     <objects name="hud">
       <object>objects\obj_menubuttons</object>
@@ -91,6 +99,9 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <rooms name="TechDemoLevel1">
+      <room>rooms\level1</room>
+    </rooms>
     <room>rooms\menu</room>
     <room>rooms\map</room>
     <room>rooms\map_vent</room>
