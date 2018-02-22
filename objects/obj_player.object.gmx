@@ -163,7 +163,7 @@ image_angle = point_direction(x, y, mouse_x, mouse_y)
     
 // Movement:
 if room = map {
-    walking = 1
+    walking = 0.8
 }
 if room = map_vent {
     walking = 0.4
@@ -173,7 +173,7 @@ if keyboard_check(vk_escape) {
     game_end()
 }
 
-if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
+if (keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S'))) and not reloading {
     sprite_index = spr_playerwalking
     if keyboard_check(ord('A')) and not collision_rectangle(x-6,y-4,x,y+4,obj_wall,false,true) {
         realX -= walking
@@ -223,7 +223,7 @@ if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
     }
 }
     
-if collision_rectangle(x-6,y-6,x+6,y+6,obj_table,false,true) and not justEntered {
+if collision_circle(x,y,6,obj_table,false,true) and not justEntered {
     if keyboard_check(ord('Q')) {
         justEntered = true
         room_goto(map_vent)

@@ -44,7 +44,9 @@
     </sprites>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_patrol0</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\draw_sprite_ext_shadow.gml</script>
     <script>scripts\draw_sprite_shadow.gml</script>
@@ -63,6 +65,7 @@
     </objects>
     <objects name="enemy">
       <object>objects\obj_enemy</object>
+      <object>objects\obj_enemypatrol</object>
       <object>objects\obj_enemydead</object>
       <object>objects\obj_bulletenemy</object>
     </objects>
