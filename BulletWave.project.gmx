@@ -90,6 +90,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\menu</room>
+    <room>rooms\level1</room>
     <room>rooms\map</room>
     <room>rooms\map_vent</room>
   </rooms>

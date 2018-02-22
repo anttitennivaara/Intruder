@@ -59,7 +59,7 @@ if selected &lt; 1 {
     
 if keyboard_check(vk_enter) or keyboard_check(vk_space) {
     if selected = 0 {
-        room_goto(map)
+        room_goto_next()
     }
     if selected = 1 {
         game_end()

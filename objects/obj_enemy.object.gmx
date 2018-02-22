@@ -86,11 +86,11 @@ if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
 
 grid = mp_grid_create(0,0,room_width/8,room_height/8,8,8)
 path = path_add()
-mp_grid_add_instances(path,obj_wall,true)
+mp_grid_add_instances(grid,obj_obstacle,false)
 mp_grid_path(grid,path,x,y,plrOldX,plrOldY,true)
 path_start(path,0.2,"",false)
 image_angle = point_direction(x,y,plrOldX,plrOldY)
-if path_speed != -1 {
+if path_index != -1 {
     sprite_index = spr_enemywalking
 }
 if path_index = -1 {

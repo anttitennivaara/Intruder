@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>realX = x
 realY = y
-walking = 3
+walking = 0.8
 cooldown = 20
 canFire = true
 maxAmmo = 12
@@ -162,15 +162,15 @@ canFire = true
 image_angle = point_direction(x, y, mouse_x, mouse_y)
     
 // Movement:
-if room = map {
-    walking = 0.8
-}
 if room = map_vent {
     walking = 0.4
 }
 
 if keyboard_check(vk_escape) {
     game_end()
+}
+else {
+    walking = 0.8
 }
 
 if (keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S'))) and not reloading {
