@@ -35,10 +35,7 @@
       <sprite>sprites\spr_ventclosed</sprite>
       <sprite>sprites\spr_trigger</sprite>
       <sprite>sprites\spr_elevator</sprite>
-      <sprites name="Desk">
-        <sprite>sprites\spr_desk</sprite>
-        <sprite>sprites\spr_desk2</sprite>
-      </sprites>
+      <sprite>sprites\spr_desk</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -80,11 +77,8 @@
       <object>objects\obj_ventopen</object>
       <object>objects\obj_ventclosed</object>
       <object>objects\obj_elevator</object>
+      <object>objects\obj_desk</object>
       <object>objects\obj_obstacle</object>
-      <objects name="Desk">
-        <object>objects\obj_desk</object>
-        <object>objects\obj_desk2</object>
-      </objects>
     </objects>
     <objects name="hud">
       <object>objects\obj_menubuttons</object>
