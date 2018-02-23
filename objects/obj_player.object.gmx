@@ -218,7 +218,7 @@ if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading {
 if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
     if keyboard_check(ord('Q')) {
         justEntered = true
-        room_goto(map)
+        room_goto(leve1_stage2)
         alarm[2] = 10
     }
 }
@@ -226,7 +226,7 @@ if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
 if collision_circle(x,y,6,obj_table,false,true) and not justEntered {
     if keyboard_check(ord('Q')) {
         justEntered = true
-        room_goto(map_vent)
+        room_goto(level1_stage2_vent)
         alarm[2] = 10
     }
 }
