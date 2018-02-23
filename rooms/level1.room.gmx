@@ -223,7 +223,7 @@
     <instance objName="obj_floor" x="8" y="72" name="inst_708C5C40" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="16" y="72" name="inst_45EBA46D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="24" y="72" name="inst_2E25C8F7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_floor" x="56" y="104" name="inst_C5C75CF9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_floor" x="56" y="104" name="inst_C5C75CF9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="180"/>
     <instance objName="obj_floor" x="32" y="72" name="inst_A82E4CA1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="56" y="72" name="inst_FC9A2CB8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="64" y="72" name="inst_619C7764" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -525,6 +525,9 @@
     <instance objName="obj_plant" x="40" y="48" name="inst_63EAB211" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plant" x="96" y="8" name="inst_7BC97A97" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plant" x="56" y="8" name="inst_A6F8C750" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_floor" x="56" y="104" name="inst_BD77C47F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_filecabinet" x="64" y="112" name="inst_4ABB8EC9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="180"/>
+    <instance objName="obj_filecabinet" x="72" y="112" name="inst_EAA6AE4F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="180"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

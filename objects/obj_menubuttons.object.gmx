@@ -97,7 +97,7 @@ draw_text_ext(windowX/2,windowY/2-32,'Infiltrator##Play#Quit',64,windowX)
 draw_text_ext(windowX/2,windowY/2+(64*selected),'[                                ]',64,windowX)
 
 draw_set_font(font_small)
-draw_text_ext(windowX/2,windowY/2-48,'The Cult of Cthulhu',64,windowX)
+draw_text_ext(windowX/2,windowY/2-48,'TECH DEMO',64,windowX)
 </string>
           </argument>
         </arguments>

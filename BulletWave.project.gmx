@@ -37,6 +37,7 @@
       <sprite>sprites\spr_elevator</sprite>
       <sprite>sprites\spr_desk</sprite>
       <sprite>sprites\spr_plant</sprite>
+      <sprite>sprites\spr_filecabinet</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -80,6 +81,8 @@
       <object>objects\obj_elevator</object>
       <object>objects\obj_desk</object>
       <object>objects\obj_obstacle</object>
+      <object>objects\obj_plant</object>
+      <object>objects\obj_filecabinet</object>
     </objects>
     <objects name="hud">
       <object>objects\obj_menubuttons</object>
@@ -88,7 +91,6 @@
     <objects name="sounds">
       <object>objects\obj_music</object>
     </objects>
-    <object>objects\obj_plant</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\menu</room>
