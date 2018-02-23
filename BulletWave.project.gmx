@@ -36,6 +36,7 @@
       <sprite>sprites\spr_trigger</sprite>
       <sprite>sprites\spr_elevator</sprite>
       <sprite>sprites\spr_desk</sprite>
+      <sprite>sprites\spr_plant</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -87,6 +88,7 @@
     <objects name="sounds">
       <object>objects\obj_music</object>
     </objects>
+    <object>objects\obj_plant</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\menu</room>
