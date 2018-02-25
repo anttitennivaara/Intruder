@@ -50,7 +50,6 @@
             <kind>1</kind>
             <string>if collision_circle(x,y,2,obj_wall,false,true) {
     instance_destroy()
-    audio_play_sound(sound_bullethit, 10, false)
 }
 </string>
           </argument>
