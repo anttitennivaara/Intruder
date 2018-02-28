@@ -26,8 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>shootingDistance = 256
-canFire = true
+canFire = false
 cooldown = 20
+plrOldX = x
+plrOldY = y
 </string>
           </argument>
         </arguments>
@@ -73,7 +75,7 @@ cooldown = 20
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Dying:
+            <string>// Collision:
 if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
     instance_create(x,y,obj_enemydead)
     choice = random(2)
@@ -87,15 +89,24 @@ if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
     instance_destroy(obj_bullet)
 }
 
-var inSight = image_angle - point_direction(x,y,obj_player.x,obj_player.y) &gt;= -50 and image_angle - point_direction(x,y,obj_player.x,obj_player.y) &lt;= 50
+grid = mp_grid_create(0,0,room_width/32,room_height/32,32,32)
+path = path_add()
+mp_grid_add_instances(grid,obj_obstacle,false)
+mp_grid_path(grid,path,x,y,plrOldX,plrOldY,true)
+path_start(path,2,"",false)
+sprite_index = spr_enemy
+
+if path_index != -1 {
+    sprite_index = spr_enemy
+}
 
 // Line of Sight
 if instance_exists(obj_player) {
-    if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
-        if inSight or distance_to_point(obj_player.x,obj_player.y) &lt;= 64 {
+    if (image_angle - point_direction(x,y,obj_player.x,obj_player.y) &gt;= -60 and image_angle - point_direction(x,y,obj_player.x,obj_player.y) &lt;= 60) or distance_to_point(obj_player.x,obj_player.y) &lt;= 64 {
+        if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
             plrOldX = obj_player.x
             plrOldY = obj_player.y
-            image_angle = point_direction(x,y,obj_player.x,obj_player.y)
+            image_angle = point_direction(x,y,plrOldX,plrOldY)
             if distance_to_point(obj_player.x,obj_player.y) &lt;= shootingDistance {
                 if canFire {
                     bullet = instance_create(x,y,obj_bulletenemy)
@@ -107,16 +118,10 @@ if instance_exists(obj_player) {
             }
         }
     }
-}
-
-path = path_add()
-if mp_grid_path(global.grid,path,x,y,obj_player.x,obj_player.y,true) {
-    path_start(path,2,path_action_stop,false)
-    sprite_index = spr_enemywalking
-}
-
-else {
-    sprite_index = spr_enemy
+    else {
+            canFire = false
+            alarm[0] = 60
+    }
 }
 </string>
           </argument>

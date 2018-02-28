@@ -97,7 +97,6 @@ draw_sprite_stretched(spr_vision,0,0,0-(windowX/16*3.5),windowX,windowX)
 
 draw_text_ext(windowX/2,windowY/2,'MISSION FAILED#Try again#Quit',64,windowX)
 draw_text_ext(windowX/2,windowY/2+(64*selected),'[                                ]',64,windowX)
-draw_text_ext(64,64,selected,64,windowX)
 </string>
           </argument>
         </arguments>
