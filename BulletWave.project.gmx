@@ -7,9 +7,12 @@
     <extension index="0">extensions\Draw Sprite Shadow</extension>
   </NewExtensions>
   <sounds name="sound">
-    <sound>sound\snd_pistol</sound>
-    <sound>sound\snd_death0</sound>
-    <sound>sound\snd_death1</sound>
+    <sound>sound\sound_PistolSilenced</sound>
+    <sound>sound\sound_enemydeath</sound>
+    <sound>sound\sound_bullethit</sound>
+    <sounds name="Music">
+      <sound>sound\AcceptingTheMission</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="player">
@@ -20,8 +23,8 @@
     </sprites>
     <sprites name="enemy">
       <sprite>sprites\spr_enemy</sprite>
-      <sprite>sprites\spr_enemywalking</sprite>
       <sprite>sprites\spr_enemydead</sprite>
+      <sprite>sprites\spr_enemywalking</sprite>
     </sprites>
     <sprites name="enviroment">
       <sprite>sprites\spr_floor</sprite>
@@ -43,7 +46,9 @@
     </sprites>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_patrol0</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\draw_sprite_ext_shadow.gml</script>
     <script>scripts\draw_sprite_shadow.gml</script>
@@ -62,6 +67,7 @@
     </objects>
     <objects name="enemy">
       <object>objects\obj_enemy</object>
+      <object>objects\obj_enemypatrol</object>
       <object>objects\obj_enemydead</object>
       <object>objects\obj_bulletenemy</object>
     </objects>
@@ -72,8 +78,7 @@
       <object>objects\obj_vent</object>
       <object>objects\obj_ventopen</object>
       <object>objects\obj_ventclosed</object>
-      <object>objects\obj_elevatorup</object>
-      <object>objects\obj_elevatordown</object>
+      <object>objects\obj_elevator</object>
       <object>objects\obj_desk</object>
       <object>objects\obj_obstacle</object>
       <object>objects\obj_plant</object>
@@ -83,13 +88,17 @@
       <object>objects\obj_menubuttons</object>
       <object>objects\obj_dialog_welcome</object>
     </objects>
+    <objects name="sounds">
+      <object>objects\obj_music</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\menu</room>
-    <room>rooms\rm_floor1</room>
-    <room>rooms\rm_floor1vent</room>
-    <room>rooms\rm_floor2</room>
-    <room>rooms\rm_floor2vent</room>
+    <room>rooms\leve1_stage2</room>
+    <room>rooms\level1_stage2_vent</room>
+    <room>rooms\level1</room>
+    <room>rooms\map</room>
+    <room>rooms\map_vent</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

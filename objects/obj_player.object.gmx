@@ -27,22 +27,20 @@
             <kind>1</kind>
             <string>realX = x
 realY = y
-walking = 3
+walking = 0.8
 cooldown = 20
 canFire = true
 maxAmmo = 12
 ammo = maxAmmo
 reloading = false
 justEntered = false
-inVent = false
-hitboxRadius = 24
 windowX = window_get_width()
 windowY = window_get_height()
 
 display_reset(0,true)
 
 // Dialogs:
-welcomeText = 'Welcome to Infiltrator beta! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
+welcomeText = 'Welcome to "Infiltrator: The Cult of Cthulhu" tech demo! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
 </string>
           </argument>
         </arguments>
@@ -162,38 +160,34 @@ canFire = true
             <kind>1</kind>
             <string>// Rotation:
 image_angle = point_direction(x, y, mouse_x, mouse_y)
-
+    
 // Movement:
-if inVent {
-    walking = 1
+if room = map_vent {
+    walking = 0.4
 }
-if not inVent and reloading {
-    walking = 2
+
+if keyboard_check(vk_escape) {
+    game_end()
 }
 else {
-    walking = 3
+    walking = 0.8
 }
 
-leftBlocked = collision_rectangle(x-hitboxRadius,y-16,x,y+16,obj_obstacle,false,true)
-rightBlocked = collision_rectangle(x,y-16,x+hitboxRadius,y+16,obj_obstacle,false,true)
-topBlocked = collision_rectangle(x-16,y-hitboxRadius,x+16,y,obj_obstacle,false,true)
-bottomBlocked = collision_rectangle(x-16,y,x+16,y+hitboxRadius,obj_obstacle,false,true)
-
-if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
+if (keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S'))) and not reloading {
     sprite_index = spr_playerwalking
-    if keyboard_check(ord('A')) and not leftBlocked {
+    if keyboard_check(ord('A')) and not collision_rectangle(x-6,y-4,x,y+4,obj_obstacle,false,true) {
         realX -= walking
         x = round(realX)
     }
-    if keyboard_check(ord('D')) and not rightBlocked {
+    if keyboard_check(ord('D')) and not collision_rectangle(x,y-4,x+6,y+4,obj_obstacle,false,true) {
         realX += walking
         x = round(realX)
     }
-    if keyboard_check(ord('W')) and not topBlocked {
+    if keyboard_check(ord('W')) and not collision_rectangle(x-4,y-6,x+4,y,obj_obstacle,false,true) {
         realY -= walking
         y = round(realY)
     }
-    if keyboard_check(ord('S')) and not bottomBlocked {
+    if keyboard_check(ord('S')) and not collision_rectangle(x-4,y,x+4,y+6,obj_obstacle,false,true) {
         realY += walking
         y = round(realY)
     }
@@ -206,11 +200,11 @@ else {
 if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading {
     bullet = instance_create(x,y,obj_bullet)
     bullet.direction = image_angle
-    bullet.speed = 40
+    bullet.speed = 10
     ammo -= 1
     alarm[0] = cooldown
     canFire = false
-    audio_play_sound(snd_pistol,1,false)
+    audio_play_sound(sound_PistolSilenced,10,false)
 }
 
 // Reloading:
@@ -221,46 +215,27 @@ if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading {
 }
 
 // Entering and leaving vents:
-if collision_circle(x,y,6,obj_table,false,true) and not justEntered {
+if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
     if keyboard_check(ord('Q')) {
         justEntered = true
-        room_goto(room_next(room))
-        inVent = true
+        room_goto(leve1_stage2)
         alarm[2] = 10
     }
 }
     
-if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
+if collision_circle(x,y,6,obj_table,false,true) and not justEntered {
     if keyboard_check(ord('Q')) {
         justEntered = true
-        room_goto(room_previous(room))
-        inVent = false
+        room_goto(level1_stage2_vent)
         alarm[2] = 10
     }
 }
 
-// Moving between floors:
-if collision_circle(x,y,hitboxRadius,obj_elevatorup,false,true) {
-    room_goto(room+2)
-    justEntered = true
-    alarm[2] = 10
-}
-
-if collision_circle(x,y,hitboxRadius,obj_elevatordown,false,true) {
-    room_goto(room-2)
-    justEntered = true
-    alarm[2] = 10
-}
-
 // Dying:
-if collision_circle(x,y,hitboxRadius,obj_bulletenemy,true,true) {
+if collision_circle(x,y,6,obj_bulletenemy,true,true) {
     dead = instance_create(x,y,obj_playerdead)
     dead.image_angle = obj_bulletenemy.image_angle
     instance_destroy()
-}
-
-if keyboard_check(vk_escape) {
-    game_end()
 }
 </string>
           </argument>

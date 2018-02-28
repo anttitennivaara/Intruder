@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>2</depth>
   <persistent>0</persistent>
-  <parentName>obj_obstacle</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>shootingDistance = 256
+            <string>sightRadius = 15
 canFire = false
 cooldown = 20
 plrOldX = x
@@ -78,40 +78,36 @@ plrOldY = y
             <string>// Collision:
 if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
     instance_create(x,y,obj_enemydead)
-    choice = random(2)
-    if choice &lt; 1 {
-        audio_play_sound(snd_death0, 1, false)
-    }
-    if choice &gt;= 1 {
-        audio_play_sound(snd_death1, 1, false)
-    }
+    audio_play_sound(sound_enemydeath, 9, false)
+    audio_play_sound(sound_bullethit, 10, false)
     instance_destroy()
     instance_destroy(obj_bullet)
 }
 
-grid = mp_grid_create(0,0,room_width/32,room_height/32,32,32)
+grid = mp_grid_create(0,0,room_width/8,room_height/8,8,8)
 path = path_add()
 mp_grid_add_instances(grid,obj_obstacle,false)
 mp_grid_path(grid,path,x,y,plrOldX,plrOldY,true)
-path_start(path,2,"",false)
-sprite_index = spr_enemy
-
+path_start(path,0.2,"",false)
+image_angle = point_direction(x,y,plrOldX,plrOldY)
 if path_index != -1 {
+    sprite_index = spr_enemywalking
+}
+if path_index = -1 {
     sprite_index = spr_enemy
 }
 
 // Line of Sight
 if instance_exists(obj_player) {
-    if (image_angle - point_direction(x,y,obj_player.x,obj_player.y) &gt;= -60 and image_angle - point_direction(x,y,obj_player.x,obj_player.y) &lt;= 60) or distance_to_point(obj_player.x,obj_player.y) &lt;= 64 {
+    if (image_angle - point_direction(x,y,obj_player.x,obj_player.y) &gt;= -45 and image_angle - point_direction(x,y,obj_player.x,obj_player.y) &lt;= 45) or distance_to_point(obj_player.x,obj_player.y) &lt;= 5 {
         if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true) {
             plrOldX = obj_player.x
             plrOldY = obj_player.y
-            image_angle = point_direction(x,y,plrOldX,plrOldY)
-            if distance_to_point(obj_player.x,obj_player.y) &lt;= shootingDistance {
+            if distance_to_point(obj_player.x,obj_player.y) &lt;= sightRadius {
                 if canFire {
                     bullet = instance_create(x,y,obj_bulletenemy)
                     bullet.direction = image_angle
-                    bullet.speed = 40
+                    bullet.speed = 10
                     alarm[0] = cooldown
                     canFire = false
                 }
@@ -120,7 +116,7 @@ if instance_exists(obj_player) {
     }
     else {
             canFire = false
-            alarm[0] = 60
+            alarm[0] = 90
     }
 }
 </string>
