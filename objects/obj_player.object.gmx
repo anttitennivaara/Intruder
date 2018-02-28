@@ -35,13 +35,17 @@ ammo = maxAmmo
 reloading = false
 justEntered = false
 inVent = false
+hasPassword = false
 hitboxRadius = 24
 windowX = window_get_width()
 windowY = window_get_height()
 
+randomize()
 display_reset(0,true)
+view_wport[0] = display_get_width()
+view_hport[0] = display_get_height()
 
-// Dialogs:
+// Texts:
 welcomeText = 'Welcome to Infiltrator beta! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
 </string>
           </argument>
@@ -164,13 +168,16 @@ canFire = true
 image_angle = point_direction(x, y, mouse_x, mouse_y)
 
 // Movement:
-if inVent {
+if inVent
+{
     walking = 1
 }
-if not inVent and reloading {
+if not inVent and reloading
+{
     walking = 2
 }
-else {
+else
+{
     walking = 3
 }
 
@@ -179,33 +186,40 @@ rightBlocked = collision_rectangle(x,y-16,x+hitboxRadius,y+16,obj_obstacle,false
 topBlocked = collision_rectangle(x-16,y-hitboxRadius,x+16,y,obj_obstacle,false,true)
 bottomBlocked = collision_rectangle(x-16,y,x+16,y+hitboxRadius,obj_obstacle,false,true)
 
-if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S')) {
+if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S'))
+{
     sprite_index = spr_playerwalking
-    if keyboard_check(ord('A')) and not leftBlocked {
+    if keyboard_check(ord('A')) and not leftBlocked
+    {
         realX -= walking
         x = round(realX)
     }
-    if keyboard_check(ord('D')) and not rightBlocked {
+    if keyboard_check(ord('D')) and not rightBlocked
+    {
         realX += walking
         x = round(realX)
     }
-    if keyboard_check(ord('W')) and not topBlocked {
+    if keyboard_check(ord('W')) and not topBlocked
+    {
         realY -= walking
         y = round(realY)
     }
-    if keyboard_check(ord('S')) and not bottomBlocked {
+    if keyboard_check(ord('S')) and not bottomBlocked
+    {
         realY += walking
         y = round(realY)
     }
 }
-else {
+else
+{
     sprite_index = spr_player
 }
 
 // Shooting:
-if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading {
+if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading
+{
     bullet = instance_create(x,y,obj_bullet)
-    bullet.direction = image_angle
+    bullet.direction = image_angle + random_range(-5,5)
     bullet.speed = 32
     ammo -= 1
     alarm[0] = cooldown
@@ -214,15 +228,18 @@ if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading {
 }
 
 // Reloading:
-if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading {
+if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading
+{
     reloading = true
     canFire = false
     alarm[1] = 180
 }
 
 // Entering and leaving vents:
-if collision_circle(x,y,6,obj_table,false,true) and not justEntered {
-    if keyboard_check(ord('Q')) {
+if collision_circle(x,y,6,obj_table,false,true) and not justEntered
+{
+    if keyboard_check(ord('Q'))
+    {
         justEntered = true
         room_goto(room_next(room))
         inVent = true
@@ -230,8 +247,10 @@ if collision_circle(x,y,6,obj_table,false,true) and not justEntered {
     }
 }
     
-if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
-    if keyboard_check(ord('Q')) {
+if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered
+{
+    if keyboard_check(ord('Q'))
+    {
         justEntered = true
         room_goto(room_previous(room))
         inVent = false
@@ -240,30 +259,44 @@ if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
 }
 
 // Moving between floors:
-if collision_circle(x,y,hitboxRadius,obj_elevatorup,false,true) and not justEntered {
-    if keyboard_check(ord('Q')) {
-        room_goto(rm_floor2)
-        justEntered = true
-        alarm[2] = 10
-    }
+if distance_to_object(obj_elevatorup) &lt; 32 and not justEntered and keyboard_check(ord('Q'))
+{
+    room_goto(rm_floor2)
+    justEntered = true
+    alarm[2] = 10
 }
 
-if collision_circle(x,y,hitboxRadius,obj_elevatordown,false,true) and not justEntered {
-    if keyboard_check(ord('Q')) {
-        room_goto(rm_floor1)
-        justEntered = true
-        alarm[2] = 10
-    }
+if distance_to_object(obj_elevatordown) &lt; 32 and not justEntered and keyboard_check(ord('Q'))
+{
+    room_goto(rm_floor1)
+    justEntered = true
+    alarm[2] = 10
+}
+
+// Picking up paper:
+if distance_to_object(obj_paper) &lt; 32 and keyboard_check(ord('Q'))
+{
+    hasPassword = true
+    instance_destroy(obj_paper)
+}
+
+// Entering password:
+if distance_to_object(obj_computer) &lt; 32 and keyboard_check(ord('Q')) and hasPassword
+{
+    instance_destroy(obj_player)
+    room_goto(victory)
 }
 
 // Dying:
-if collision_circle(x,y,hitboxRadius,obj_bulletenemy,true,true) {
+if collision_circle(x,y,hitboxRadius,obj_bulletenemy,true,true)
+{
     dead = instance_create(x,y,obj_playerdead)
     dead.image_angle = obj_bulletenemy.image_angle
     instance_destroy()
 }
 
-if keyboard_check(vk_escape) {
+if keyboard_check(vk_escape)
+{
     game_end()
 }
 </string>
@@ -301,40 +334,36 @@ draw_sprite_stretched(spr_vision,0,0,0-(windowX/16*3.5),windowX,windowX)
 
 draw_text(64,windowY-64,string_format(ammo,0,0))
 
-if reloading {
+if reloading
+{
     draw_set_color(c_white)
     draw_set_font(font_small)
     draw_text(64,windowY-22,'Reloading...')
-}
-
-if collision_rectangle(x,y,x,y,obj_ventopen,false,true) {
-    draw_set_color(c_white)
-    draw_set_font(font_small)
-    draw_text(windowX/2,windowY/2,'[Q] Leave vent')
-}
-
-if collision_rectangle(x,y-4,x,y+4,obj_table,false,true) {
-    draw_set_color(c_white)
-    draw_set_font(font_small)
-    draw_text(windowX/2,windowY/2,'[Q] Enter vent')
 }
 
 draw_sprite(spr_ammoind,ammo,32,windowY-64)
 
 var inDialog = false
 
-if collision_point(x,y,obj_dialog_welcome,false,true) and obj_dialog_welcome.done = false {
+if collision_point(x,y,obj_dialog_welcome,false,true) and obj_dialog_welcome.done = false
+{
     inDialog = true
     dialog = welcomeText
 }
     
-if inDialog {
+if inDialog
+{
     draw_sprite(spr_dialog,0,windowX/2,windowY/10*7)
     draw_set_font(font_small)
     draw_set_color(c_black)
     draw_text_ext(windowX/2,windowY/10*7,dialog,32,440)
     walking = 0
     alarm[3] = 300
+}
+
+if hasPassword
+{
+    draw_sprite_stretched(spr_paper,0,96,windowY-96,64,64)
 }
 </string>
           </argument>

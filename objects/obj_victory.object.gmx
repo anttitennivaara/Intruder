@@ -59,7 +59,7 @@ if selected &lt; 1 {
     
 if keyboard_check(vk_enter) or keyboard_check(vk_space) {
     if selected = 0 {
-        room_goto_next()
+        game_restart()
     }
     if selected = 1 {
         game_end()
@@ -93,11 +93,8 @@ draw_set_valign(fa_center)
 draw_set_color(c_white)
 
 draw_set_font(font_large)
-draw_text_ext(windowX/2,windowY/2-32,'Intruder##Play#Quit',64,windowX)
-draw_text_ext(windowX/2,windowY/2+(64*selected),'[                                ]',64,windowX)
-
-draw_set_font(font_small)
-draw_text_ext(windowX/2,windowY/2-48,'Beta 1.1',64,windowX)
+draw_text_ext(windowX/2,windowY/2-32,'Congratulations!#You have completed the demo##Play again#Quit',64,windowX)
+draw_text_ext(windowX/2,windowY/2+32+(64*selected),'[                                ]',64,windowX)
 </string>
           </argument>
         </arguments>

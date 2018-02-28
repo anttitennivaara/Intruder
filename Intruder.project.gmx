@@ -33,8 +33,10 @@
       <sprite>sprites\spr_trigger</sprite>
       <sprite>sprites\spr_elevator</sprite>
       <sprite>sprites\spr_desk</sprite>
+      <sprite>sprites\spr_computer</sprite>
       <sprite>sprites\spr_plant</sprite>
       <sprite>sprites\spr_filecabinet</sprite>
+      <sprite>sprites\spr_paper</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_dialog</sprite>
@@ -78,9 +80,12 @@
       <object>objects\obj_obstacle</object>
       <object>objects\obj_plant</object>
       <object>objects\obj_filecabinet</object>
+      <object>objects\obj_paper</object>
+      <object>objects\obj_computer</object>
     </objects>
     <objects name="hud">
-      <object>objects\obj_menubuttons</object>
+      <object>objects\obj_menu</object>
+      <object>objects\obj_victory</object>
       <object>objects\obj_dialog_welcome</object>
     </objects>
   </objects>
@@ -88,6 +93,7 @@
     <room>rooms\menu</room>
     <room>rooms\rm_floor1</room>
     <room>rooms\rm_floor2</room>
+    <room>rooms\victory</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -838,6 +838,7 @@
     <instance objName="obj_floor" x="480" y="160" name="inst_9EE49FF8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="512" y="160" name="inst_C3BDC0FA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="544" y="160" name="inst_F437A7A9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_computer" x="832" y="640" name="inst_710F11FF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
