@@ -28,7 +28,7 @@
             <string>realX = x
 realY = y
 walking = 3
-cooldown = 20
+cooldown = 30
 canFire = true
 maxAmmo = 12
 ammo = maxAmmo
@@ -206,7 +206,7 @@ else {
 if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading {
     bullet = instance_create(x,y,obj_bullet)
     bullet.direction = image_angle
-    bullet.speed = 40
+    bullet.speed = 32
     ammo -= 1
     alarm[0] = cooldown
     canFire = false

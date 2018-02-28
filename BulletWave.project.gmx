@@ -64,7 +64,6 @@
       <object>objects\obj_enemy</object>
       <object>objects\obj_enemydead</object>
       <object>objects\obj_bulletenemy</object>
-      <object>objects\obj_grid</object>
     </objects>
     <objects name="enviroment">
       <object>objects\obj_floor</object>
