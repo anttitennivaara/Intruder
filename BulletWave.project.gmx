@@ -64,6 +64,7 @@
       <object>objects\obj_enemy</object>
       <object>objects\obj_enemydead</object>
       <object>objects\obj_bulletenemy</object>
+      <object>objects\obj_grid</object>
     </objects>
     <objects name="enviroment">
       <object>objects\obj_floor</object>
@@ -87,9 +88,7 @@
   <rooms name="rooms">
     <room>rooms\menu</room>
     <room>rooms\rm_floor1</room>
-    <room>rooms\rm_floor1vent</room>
     <room>rooms\rm_floor2</room>
-    <room>rooms\rm_floor2vent</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

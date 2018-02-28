@@ -240,16 +240,20 @@ if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered {
 }
 
 // Moving between floors:
-if collision_circle(x,y,hitboxRadius,obj_elevatorup,false,true) {
-    room_goto(room+2)
-    justEntered = true
-    alarm[2] = 10
+if collision_circle(x,y,hitboxRadius,obj_elevatorup,false,true) and not justEntered {
+    if keyboard_check(ord('Q')) {
+        room_goto(rm_floor2)
+        justEntered = true
+        alarm[2] = 10
+    }
 }
 
-if collision_circle(x,y,hitboxRadius,obj_elevatordown,false,true) {
-    room_goto(room-2)
-    justEntered = true
-    alarm[2] = 10
+if collision_circle(x,y,hitboxRadius,obj_elevatordown,false,true) and not justEntered {
+    if keyboard_check(ord('Q')) {
+        room_goto(rm_floor1)
+        justEntered = true
+        alarm[2] = 10
+    }
 }
 
 // Dying:

@@ -25,15 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>windowX = window_get_width()
-windowY = window_get_height()
-selected = 0
+            <string>global.grid = mp_grid_create(0,0,room_width/16,room_height/16,32,32)
+mp_grid_add_instances(global.grid,obj_obstacle,false)
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="7" enumb="3">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,54 +49,7 @@ selected = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if selected &gt; 0 {
-    selected -= max(keyboard_check(vk_up),keyboard_check(ord('W')))
-}
-if selected &lt; 1 {
-    selected += max(keyboard_check(vk_down),keyboard_check(ord('S')))
-}
-    
-if keyboard_check(vk_enter) or keyboard_check(vk_space) {
-    if selected = 0 {
-        room_goto_next()
-    }
-    if selected = 1 {
-        game_end()
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_alpha_test(true)
-draw_set_halign(fa_center)
-draw_set_valign(fa_center)
-draw_set_color(c_white)
-
-draw_set_font(font_large)
-draw_text_ext(windowX/2,windowY/2-32,'Intruder##Play#Quit',64,windowX)
-draw_text_ext(windowX/2,windowY/2+(64*selected),'[                                ]',64,windowX)
-
-draw_set_font(font_small)
-draw_text_ext(windowX/2,windowY/2-48,'Beta 1.1',64,windowX)
+            <string>mp_grid_destroy(global.grid)
 </string>
           </argument>
         </arguments>
