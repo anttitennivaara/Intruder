@@ -107,9 +107,9 @@ if instance_exists(obj_player)
     var aiming = distance_to_object(obj_player/10)
 
     // Pathfinding:
-    if mp_grid_path(grid,path,x,y,lastX,lastY,true) and distance_to_object(obj_player) &gt; 64
+    if mp_grid_path(grid,path,x,y,lastX,lastY,true) and distance_to_point(lastX, lastY) &gt; 64
     {
-        path_start(path,2,"",false)
+        path_start(path,2,"",true)
     }
     if path_speed = 0
     {
