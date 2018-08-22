@@ -28,8 +28,10 @@
             <string>realX = x
 realY = y
 walking = 3
+sliding = false
 cooldown = 30
 canFire = true
+canSlide = true
 maxAmmo = 12
 ammo = maxAmmo
 reloading = false
@@ -44,9 +46,52 @@ randomize()
 display_reset(0,true)
 view_wport[0] = display_get_width()
 view_hport[0] = display_get_height()
-
-// Texts:
-welcomeText = 'Welcome to Infiltrator beta! If you are interested in the full release or anything regarding to the game, stay tuned in Twitter @FrosticOfficial'
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>canSlide = true
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>sliding = false
 </string>
           </argument>
         </arguments>
@@ -165,14 +210,21 @@ canFire = true
           <argument>
             <kind>1</kind>
             <string>// Rotation:
-image_angle = point_direction(x, y, mouse_x, mouse_y)
+if not sliding
+{
+    image_angle = point_direction(x, y, mouse_x, mouse_y)
+}
 
 // Movement:
 if inVent
 {
     walking = 1
 }
-if not inVent and reloading
+else if sliding
+{
+    walking = 6
+}
+else if not inVent and reloading
 {
     walking = 2
 }
@@ -188,7 +240,14 @@ bottomBlocked = collision_rectangle(x-16,y,x+16,y+hitboxRadius,obj_obstacle,fals
 
 if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W')) or keyboard_check(ord('S'))
 {
-    sprite_index = spr_playerwalking
+    if sliding
+    {
+        sprite_index = spr_playersliding
+    }
+    else
+    {
+        sprite_index = spr_playerwalking
+    }
     if keyboard_check(ord('A')) and not leftBlocked
     {
         realX -= walking
@@ -209,6 +268,13 @@ if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W
         realY += walking
         y = round(realY)
     }
+    if keyboard_check(vk_space) and canSlide
+    {
+        sliding = true
+        alarm[4] = 20
+        canSlide = false
+        alarm[5] = 60
+    }
 }
 else
 {
@@ -216,11 +282,11 @@ else
 }
 
 // Shooting:
-if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading
+if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading and not sliding
 {
     bullet = instance_create(x,y,obj_bullet)
     bullet.direction = image_angle + random_range(-5,5)
-    bullet.speed = 32
+    bullet.speed = 16
     ammo -= 1
     alarm[0] = cooldown
     canFire = false
@@ -228,7 +294,7 @@ if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading
 }
 
 // Reloading:
-if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading
+if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading and not sliding
 {
     reloading = true
     canFire = false
@@ -241,7 +307,7 @@ if collision_circle(x,y,6,obj_table,false,true) and not justEntered
     if keyboard_check(ord('Q'))
     {
         justEntered = true
-        room_goto(room_next(room))
+        room_goto(room+1)
         inVent = true
         alarm[2] = 10
     }
@@ -252,7 +318,7 @@ if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered
     if keyboard_check(ord('Q'))
     {
         justEntered = true
-        room_goto(room_previous(room))
+        room_goto(room-1)
         inVent = false
         alarm[2] = 10
     }
@@ -261,14 +327,14 @@ if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered
 // Moving between floors:
 if distance_to_object(obj_elevatorup) &lt; 32 and not justEntered and keyboard_check(ord('Q'))
 {
-    room_goto(rm_floor2)
+    room_goto(room+2)
     justEntered = true
     alarm[2] = 10
 }
 
 if distance_to_object(obj_elevatordown) &lt; 32 and not justEntered and keyboard_check(ord('Q'))
 {
-    room_goto(rm_floor1)
+    room_goto(room-2)
     justEntered = true
     alarm[2] = 10
 }
@@ -292,6 +358,12 @@ if collision_circle(x,y,hitboxRadius,obj_bulletenemy,true,true)
 {
     dead = instance_create(x,y,obj_playerdead)
     dead.image_angle = obj_bulletenemy.image_angle
+    draw_sprite_stretched(spr_vision,0,-1,0-(windowX/16*3.5),windowX+1,windowX)
+    instance_destroy()
+}
+
+if room == victory
+{
     instance_destroy()
 }
 
@@ -330,8 +402,6 @@ draw_set_font(font_large)
 view_wport[0] = display_get_width()
 view_hport[0] = display_get_height()
 
-draw_sprite_stretched(spr_vision,0,0,0-(windowX/16*3.5),windowX,windowX)
-
 draw_text(64,windowY-64,string_format(ammo,0,0))
 
 if reloading
@@ -343,13 +413,18 @@ if reloading
 
 draw_sprite(spr_ammoind,ammo,32,windowY-64)
 
-var inDialog = false
-
-if collision_point(x,y,obj_dialog_welcome,false,true) and obj_dialog_welcome.done = false
+if collision_circle(x,y,6,obj_table,false,true)
 {
-    inDialog = true
-    dialog = welcomeText
+    draw_set_font(font_small)
+    draw_text(windowX/2,windowY/2+100,'[Q] Enter vent')
 }
+if collision_circle(x,y,6,obj_ventopen,false,true)
+{
+    draw_set_font(font_small)
+    draw_text(windowX/2,windowY/2+100,'[Q] Exit vent')
+}
+
+var inDialog = false
     
 if inDialog
 {

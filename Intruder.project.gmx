@@ -15,6 +15,7 @@
     <sprites name="player">
       <sprite>sprites\spr_player</sprite>
       <sprite>sprites\spr_playerwalking</sprite>
+      <sprite>sprites\spr_playersliding</sprite>
       <sprite>sprites\spr_bullet</sprite>
       <sprite>sprites\spr_playerdead</sprite>
     </sprites>
@@ -86,13 +87,26 @@
     <objects name="hud">
       <object>objects\obj_menu</object>
       <object>objects\obj_victory</object>
-      <object>objects\obj_dialog_welcome</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\menu</room>
-    <room>rooms\rm_floor1</room>
-    <room>rooms\rm_floor2</room>
+    <room>rooms\rm_1_I</room>
+    <room>rooms\rm_1_vent</room>
+    <room>rooms\rm_2_N</room>
+    <room>rooms\rm_2_vent</room>
+    <room>rooms\rm_3_T</room>
+    <room>rooms\rm_3_vent</room>
+    <room>rooms\rm_4_R</room>
+    <room>rooms\rm_4_vent</room>
+    <room>rooms\rm_5_U</room>
+    <room>rooms\rm_5_vent</room>
+    <room>rooms\rm_6_D</room>
+    <room>rooms\rm_6_vent</room>
+    <room>rooms\rm_7_E</room>
+    <room>rooms\rm_7_vent</room>
+    <room>rooms\rm_8_R</room>
+    <room>rooms\rm_8_vent</room>
     <room>rooms\victory</room>
   </rooms>
   <help>
