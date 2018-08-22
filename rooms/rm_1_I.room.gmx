@@ -174,7 +174,6 @@
     <instance objName="obj_elevatorup" x="608" y="96" name="inst_124E956A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
     <instance objName="obj_player" x="544" y="544" name="inst_35FC2B87" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="90"/>
     <instance objName="obj_enemy" x="544" y="288" name="inst_EE661277" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="90"/>
-    <instance objName="&lt;undefined&gt;" x="480" y="480" name="inst_D2BD4620" locked="0" code="" scaleX="4" scaleY="4" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

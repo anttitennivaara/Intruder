@@ -209,7 +209,8 @@ canFire = true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Rotation:
+            <string>
+// Rotation:
 if not sliding
 {
     image_angle = point_direction(x, y, mouse_x, mouse_y)
@@ -268,7 +269,7 @@ if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W
         realY += walking
         y = round(realY)
     }
-    if keyboard_check(vk_space) and canSlide
+    if keyboard_check(vk_space) and canSlide and not inVent
     {
         sliding = true
         alarm[4] = 20
@@ -302,7 +303,7 @@ if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading and not slidin
 }
 
 // Entering and leaving vents:
-if collision_circle(x,y,6,obj_table,false,true) and not justEntered
+if collision_point(x,y,obj_table,false,true) and not justEntered
 {
     if keyboard_check(ord('Q'))
     {
@@ -313,7 +314,7 @@ if collision_circle(x,y,6,obj_table,false,true) and not justEntered
     }
 }
     
-if collision_circle(x,y,6,obj_ventopen,false,true) and not justEntered
+if collision_point(x,y,obj_ventopen,false,true) and not justEntered
 {
     if keyboard_check(ord('Q'))
     {
@@ -413,27 +414,25 @@ if reloading
 
 draw_sprite(spr_ammoind,ammo,32,windowY-64)
 
-if collision_circle(x,y,6,obj_table,false,true)
+if collision_point(x,y,obj_table,false,true)
 {
     draw_set_font(font_small)
     draw_text(windowX/2,windowY/2+100,'[Q] Enter vent')
 }
-if collision_circle(x,y,6,obj_ventopen,false,true)
+if collision_point(x,y,obj_ventopen,false,true)
 {
     draw_set_font(font_small)
     draw_text(windowX/2,windowY/2+100,'[Q] Exit vent')
 }
-
-var inDialog = false
-    
-if inDialog
+if distance_to_object(obj_elevatorup) &lt; 32
 {
-    draw_sprite(spr_dialog,0,windowX/2,windowY/10*7)
     draw_set_font(font_small)
-    draw_set_color(c_black)
-    draw_text_ext(windowX/2,windowY/10*7,dialog,32,440)
-    walking = 0
-    alarm[3] = 300
+    draw_text(windowX/2,windowY/2+100,'[Q] Go to next floor')
+}
+if distance_to_object(obj_elevatordown) &lt; 32
+{
+    draw_set_font(font_small)
+    draw_text(windowX/2,windowY/2+100,'[Q] Go to previous floor')
 }
 
 if hasPassword
