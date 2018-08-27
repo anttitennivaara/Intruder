@@ -18,7 +18,7 @@
   </TextureGroups>
   <For3D>0</For3D>
   <width>128</width>
-  <height>92</height>
+  <height>48</height>
   <frames>
     <frame index="0">images\spr_elevator_0.png</frame>
   </frames>

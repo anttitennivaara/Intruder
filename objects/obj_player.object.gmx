@@ -39,6 +39,7 @@ justEntered = false
 inVent = false
 hasPassword = false
 hitboxRadius = 24
+range = 32
 windowX = window_get_width()
 windowY = window_get_height()
 
@@ -217,21 +218,17 @@ if not sliding
 }
 
 // Movement:
-if inVent
-{
-    walking = 1
-}
-else if sliding
+if sliding
 {
     walking = 6
 }
-else if not inVent and reloading
+else if inVent or reloading
 {
     walking = 2
 }
 else
 {
-    walking = 3
+    walking = 4
 }
 
 leftBlocked = collision_rectangle(x-hitboxRadius,y-16,x,y+16,obj_obstacle,false,true)
@@ -269,7 +266,7 @@ if keyboard_check(ord('A')) or keyboard_check(ord('D')) or keyboard_check(ord('W
         realY += walking
         y = round(realY)
     }
-    if keyboard_check(vk_space) and canSlide and not inVent
+    if keyboard_check(vk_space) and canSlide and not inVent and not reloading
     {
         sliding = true
         alarm[4] = 20
@@ -286,7 +283,7 @@ else
 if mouse_check_button(mb_left) and canFire and ammo &gt; 0 and not reloading and not sliding
 {
     bullet = instance_create(x,y,obj_bullet)
-    bullet.direction = image_angle + random_range(-5,5)
+    bullet.direction = image_angle + random_range(-1,1)
     bullet.speed = 16
     ammo -= 1
     alarm[0] = cooldown
@@ -326,14 +323,14 @@ if collision_point(x,y,obj_ventopen,false,true) and not justEntered
 }
 
 // Moving between floors:
-if distance_to_object(obj_elevatorup) &lt; 32 and not justEntered and keyboard_check(ord('Q'))
+if collision_circle(x,y,range,obj_elevatorup,false,true) and not justEntered and keyboard_check(ord('Q'))
 {
     room_goto(room+2)
     justEntered = true
     alarm[2] = 10
 }
 
-if distance_to_object(obj_elevatordown) &lt; 32 and not justEntered and keyboard_check(ord('Q'))
+if collision_circle(x,y,range,obj_elevatordown,false,true) and not justEntered and keyboard_check(ord('Q'))
 {
     room_goto(room-2)
     justEntered = true
@@ -341,26 +338,31 @@ if distance_to_object(obj_elevatordown) &lt; 32 and not justEntered and keyboard
 }
 
 // Picking up paper:
-if distance_to_object(obj_paper) &lt; 32 and keyboard_check(ord('Q'))
+if collision_circle(x,y,range,obj_paper,false,true) and keyboard_check(ord('Q'))
 {
     hasPassword = true
     instance_destroy(obj_paper)
 }
 
 // Entering password:
-if distance_to_object(obj_computer) &lt; 32 and keyboard_check(ord('Q')) and hasPassword
+if collision_circle(x,y,range,obj_computer,false,true) and keyboard_check(ord('Q')) and hasPassword
 {
-    instance_destroy(obj_player)
     room_goto(victory)
 }
 
 // Dying:
-if collision_circle(x,y,hitboxRadius,obj_bulletenemy,true,true)
+if collision_circle(x,y,hitboxRadius,obj_bulletenemy,true,true) and not sliding
 {
     dead = instance_create(x,y,obj_playerdead)
     dead.image_angle = obj_bulletenemy.image_angle
     draw_sprite_stretched(spr_vision,0,-1,0-(windowX/16*3.5),windowX+1,windowX)
     instance_destroy()
+}
+
+// Screenshot:
+if keyboard_check_pressed(ord('M'))
+{
+    screen_save(working_directory + 'screenshot.png')
 }
 
 if room == victory
@@ -424,12 +426,12 @@ if collision_point(x,y,obj_ventopen,false,true)
     draw_set_font(font_small)
     draw_text(windowX/2,windowY/2+100,'[Q] Exit vent')
 }
-if distance_to_object(obj_elevatorup) &lt; 32
+if collision_circle(x,y,range,obj_elevatorup,false,true)
 {
     draw_set_font(font_small)
     draw_text(windowX/2,windowY/2+100,'[Q] Go to next floor')
 }
-if distance_to_object(obj_elevatordown) &lt; 32
+if collision_circle(x,y,range,obj_elevatordown,false,true)
 {
     draw_set_font(font_small)
     draw_text(windowX/2,windowY/2+100,'[Q] Go to previous floor')

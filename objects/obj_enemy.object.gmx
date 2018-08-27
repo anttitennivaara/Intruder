@@ -31,7 +31,9 @@ lastX = x
 lastY = y
 
 cellSize = 32
-grid = mp_grid_create(0,0,room_width div cellSize,room_height div cellSize,cellSize,cellSize)
+global.grid = mp_grid_create(16,16,room_width div cellSize,room_height div cellSize,cellSize,cellSize)
+
+/*
 mp_grid_add_instances(grid,obj_wall,false)
 mp_grid_add_instances(grid,obj_table,false)
 mp_grid_add_instances(grid,obj_elevatorup,false)
@@ -39,6 +41,8 @@ mp_grid_add_instances(grid,obj_elevatordown,false)
 mp_grid_add_instances(grid,obj_desk,false)
 mp_grid_add_instances(grid,obj_plant,false)
 mp_grid_add_instances(grid,obj_filecabinet,false)
+*/
+mp_grid_add_instances(global.grid,obj_obstacle,false)
 path = path_add()
 </string>
           </argument>
@@ -86,7 +90,7 @@ path = path_add()
           <argument>
             <kind>1</kind>
             <string>// Dying:
-if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
+if collision_circle(x, y, 16, obj_bullet, false, true) {
     instance_create(x,y,obj_enemydead)
     choice = random(2)
     if choice &lt; 1 {
@@ -101,15 +105,19 @@ if collision_rectangle(x-28, y-28, x+28, y+28, obj_bullet, false, true) {
 
 if instance_exists(obj_player)
 {
-    var sightLine = false
+    var sightBlocked = true
     var vision = false
     var notice = false
 
     // Pathfinding:
-    if mp_grid_path(grid,path,x,y,lastX,lastY,true) and distance_to_point(lastX, lastY) &gt; 64
+    if mp_grid_path(global.grid,path,x,y,lastX,lastY,true) and distance_to_point(lastX, lastY) &gt; 64
     {
-        path_start(path,2,"",true)
+        path_start(path,3,"",true)
         sprite_index = spr_enemywalking
+    }
+    else if not mp_grid_path(global.grid,path,x,y,lastX,lastY,true)
+    {
+        path_end()
     }
     else
     {
@@ -117,21 +125,20 @@ if instance_exists(obj_player)
     }
 
     // Targeting:
-    if distance_to_object(obj_player) &lt; 256
+    if distance_to_object(obj_player) &lt;= 256
     {
-        if not collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true)
-        {
-            sightLine = true
-        }
-        if (abs(image_angle - point_direction(x,y,obj_player.x,obj_player.y)) &lt;= 50 or abs(image_angle - point_direction(x,y,obj_player.x,obj_player.y)) &gt;= 310)
-        {
-            vision = true
-        }
-        if vision or distance_to_object(obj_player) &lt;= 32
+        sightBlocked = min(collision_line(x,y,obj_player.x,obj_player.y,obj_wall,false,true),
+                    collision_line(x,y,obj_player.x,obj_player.y-24,obj_wall,false,true),
+                    collision_line(x,y,obj_player.x+24,obj_player.y,obj_wall,false,true),
+                    collision_line(x,y,obj_player.x,obj_player.y+24,obj_wall,false,true),
+                    collision_line(x,y,obj_player.x-24,obj_player.y,obj_wall,false,true))
+        vision = max(abs(image_angle - point_direction(x,y,obj_player.x,obj_player.y)) &lt;= 60,
+                     abs(image_angle - point_direction(x,y,obj_player.x,obj_player.y)) &gt;= 300)
+        if distance_to_point(obj_player.x,obj_player.y) &lt;= 24
         {
             notice = true
         }
-        if sightLine and notice and instance_exists(obj_player)
+        if (not sightBlocked and (vision or notice)) and instance_exists(obj_player)
         {
             lastX = obj_player.x
             lastY = obj_player.y
@@ -141,13 +148,14 @@ if instance_exists(obj_player)
                 bullet = instance_create(x,y,obj_bulletenemy)
                 bullet.speed = 16
                 bullet.direction = image_angle + random_range(-8,8)
-                alarm[0] = 20
+                alarm[0] = 4
+                canFire = false
             }
         }
         else
         {
-        canFire = false
-        alarm[0] = 80
+            canFire = false
+            alarm[0] = 30
         }
     }
 }
@@ -177,6 +185,13 @@ if instance_exists(obj_player)
 
 draw_sprite_ext_shadow(sprite_index,0,x,y,1,1,image_angle,c_white,1,2,225,c_black,0.5)
 draw_self()
+
+/*
+draw_set_font(font_small)
+draw_text(x,y,sight)
+draw_text(x,y+16,vision)
+draw_text(x,y+32,notice)
+*/
 </string>
           </argument>
         </arguments>

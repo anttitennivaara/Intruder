@@ -31,7 +31,6 @@
       <sprite>sprites\spr_vent</sprite>
       <sprite>sprites\spr_ventoppen</sprite>
       <sprite>sprites\spr_ventclosed</sprite>
-      <sprite>sprites\spr_trigger</sprite>
       <sprite>sprites\spr_elevator</sprite>
       <sprite>sprites\spr_desk</sprite>
       <sprite>sprites\spr_computer</sprite>
@@ -40,7 +39,6 @@
       <sprite>sprites\spr_paper</sprite>
     </sprites>
     <sprites name="hud">
-      <sprite>sprites\spr_dialog</sprite>
       <sprite>sprites\spr_vision</sprite>
       <sprite>sprites\spr_ammoind</sprite>
     </sprites>
@@ -84,7 +82,7 @@
       <object>objects\obj_paper</object>
       <object>objects\obj_computer</object>
     </objects>
-    <objects name="hud">
+    <objects name="menu">
       <object>objects\obj_menu</object>
       <object>objects\obj_victory</object>
     </objects>
