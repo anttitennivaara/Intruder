@@ -47,6 +47,8 @@ randomize()
 display_reset(0,true)
 view_wport[0] = display_get_width()
 view_hport[0] = display_get_height()
+
+light_create(spr_lightspot,1,c_white,0.5,image_angle,true)
 </string>
           </argument>
         </arguments>
@@ -215,6 +217,7 @@ canFire = true
 if not sliding
 {
     image_angle = point_direction(x, y, mouse_x, mouse_y)
+    light_set_rotation(image_angle+90)
 }
 
 // Movement:
@@ -464,8 +467,6 @@ if hasPassword
           <argument>
             <kind>1</kind>
             <string>draw_set_alpha_test(true)
-
-draw_sprite_ext_shadow(sprite_index,0,x,y,1,1,image_angle,c_white,1,2,225,c_black,0.5)
 draw_self()
 </string>
           </argument>

@@ -5,6 +5,7 @@
   </Configs>
   <NewExtensions>
     <extension index="0">extensions\Draw Sprite Shadow</extension>
+    <extension index="1">extensions\Fast Lights</extension>
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\snd_pistol</sound>
@@ -37,11 +38,16 @@
       <sprite>sprites\spr_plant</sprite>
       <sprite>sprites\spr_filecabinet</sprite>
       <sprite>sprites\spr_paper</sprite>
+      <sprite>sprites\spr_door</sprite>
+      <sprite>sprites\spr_lamp</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_vision</sprite>
       <sprite>sprites\spr_ammoind</sprite>
     </sprites>
+    <sprite>sprites\spr_lightspot</sprite>
+    <sprite>sprites\spr_lightpoint</sprite>
+    <sprite>sprites\spr_lightsiren</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -50,7 +56,29 @@
     <script>scripts\draw_sprite_shadow.gml</script>
     <script>scripts\draw_shadow.gml</script>
     <script>scripts\draw_shadow_ext.gml</script>
+    <script>scripts\light_init.gml</script>
+    <script>scripts\light_draw.gml</script>
+    <script>scripts\light_create.gml</script>
+    <script>scripts\light_destroy.gml</script>
+    <script>scripts\light_create_caster.gml</script>
+    <script>scripts\light_create_caster_from_points.gml</script>
+    <script>scripts\light_create_caster_from_path.gml</script>
+    <script>scripts\light_destroy_caster.gml</script>
+    <script>scripts\light_set_size.gml</script>
+    <script>scripts\light_set_quality.gml</script>
+    <script>scripts\light_set_ambient_color.gml</script>
+    <script>scripts\light_set_iterations.gml</script>
+    <script>scripts\light_set_alpha.gml</script>
+    <script>scripts\light_set_color.gml</script>
+    <script>scripts\light_set_rotation.gml</script>
+    <script>scripts\light_set_sprite.gml</script>
+    <script>scripts\light_set_scale.gml</script>
+    <script>scripts\light_draw_sprite_dark.gml</script>
+    <script>scripts\draw_surface_blurred.gml</script>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_blur.shader</shader>
+  </shaders>
   <fonts name="fonts">
     <font>fonts\font_large</font>
     <font>fonts\font_small</font>
@@ -69,6 +97,7 @@
     <objects name="enviroment">
       <object>objects\obj_floor</object>
       <object>objects\obj_wall</object>
+      <object>objects\obj_door</object>
       <object>objects\obj_table</object>
       <object>objects\obj_vent</object>
       <object>objects\obj_ventopen</object>
@@ -77,10 +106,13 @@
       <object>objects\obj_elevatordown</object>
       <object>objects\obj_desk</object>
       <object>objects\obj_obstacle</object>
+      <object>objects\obj_obstruction</object>
       <object>objects\obj_plant</object>
       <object>objects\obj_filecabinet</object>
       <object>objects\obj_paper</object>
       <object>objects\obj_computer</object>
+      <object>objects\obj_lamp</object>
+      <object>objects\obj_light</object>
     </objects>
     <objects name="menu">
       <object>objects\obj_menu</object>
