@@ -65,7 +65,7 @@ light_create_caster_from_points(xpoints,ypoints)
             <kind>1</kind>
             <string>if instance_exists(obj_player)
 {
-    if keyboard_check_pressed(ord('Q')) and distance_to_point(obj_player.x,obj_player.y) &lt;= 32
+    if keyboard_check_pressed(ord('Q')) and distance_to_point(obj_player.x,obj_player.y) &lt;= obj_player.range
     {
         if image_angle == 0
         {

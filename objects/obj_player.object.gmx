@@ -422,22 +422,27 @@ draw_sprite(spr_ammoind,ammo,32,windowY-64)
 if collision_point(x,y,obj_table,false,true)
 {
     draw_set_font(font_small)
-    draw_text(windowX/2,windowY/2+100,'[Q] Enter vent')
+    draw_text(windowX/2,windowY/2+100,'[E] Enter vent')
 }
 if collision_point(x,y,obj_ventopen,false,true)
 {
     draw_set_font(font_small)
-    draw_text(windowX/2,windowY/2+100,'[Q] Exit vent')
+    draw_text(windowX/2,windowY/2+100,'[E] Exit vent')
+}
+if collision_circle(x,y,range,obj_door,false,true)
+{
+    draw_set_font(font_small)
+    draw_text(windowX/2,windowY/2+132,'[Q] Open/Close door')
 }
 if collision_circle(x,y,range,obj_elevatorup,false,true)
 {
     draw_set_font(font_small)
-    draw_text(windowX/2,windowY/2+100,'[Q] Go to next floor')
+    draw_text(windowX/2,windowY/2+132,'[Q] Go to next floor')
 }
 if collision_circle(x,y,range,obj_elevatordown,false,true)
 {
     draw_set_font(font_small)
-    draw_text(windowX/2,windowY/2+100,'[Q] Go to previous floor')
+    draw_text(windowX/2,windowY/2+132,'[Q] Go to previous floor')
 }
 
 if hasPassword
