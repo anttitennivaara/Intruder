@@ -305,7 +305,7 @@ if keyboard_check(ord('R')) and ammo != maxAmmo and not reloading and not slidin
 // Entering and leaving vents:
 if collision_point(x,y,obj_table,false,true) and not justEntered
 {
-    if keyboard_check(ord('Q'))
+    if keyboard_check(ord('E'))
     {
         justEntered = true
         room_goto(room+1)
@@ -316,7 +316,7 @@ if collision_point(x,y,obj_table,false,true) and not justEntered
     
 if collision_point(x,y,obj_ventopen,false,true) and not justEntered
 {
-    if keyboard_check(ord('Q'))
+    if keyboard_check(ord('E'))
     {
         justEntered = true
         room_goto(room-1)
